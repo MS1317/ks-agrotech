@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import styles from 'header.module.css';
 import {
   Dialog,
   DialogPanel,
@@ -22,6 +23,10 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 const products = [
   { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
@@ -39,18 +44,48 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="bg-white">
-      <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+    <header className='fixed header w-full z-40'>
+      <div className="container mx-auto header-content">
+              <div className="details container mx-auto flex max-w-7xl p-6 lg:px-8 ">
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
-            <span className="sr-only">Your Company</span>
-            <img
+            <span className="font-bold">K.S Agrotech</span>
+            {/* <img
               alt=""
               src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
               className="h-8 w-auto"
-            />
+            /> */}
           </a>
         </div>
+        <div className="ct-dt flex flex-row ">
+          <div className="ct ph flex items-center">
+            <FontAwesomeIcon icon={faPhone} className="text-gray-700 size-6" />
+            <ul>
+              <li className="sp-contact-time "><strong>Call Us</strong></li>
+              <li className="sp-contact-email">222-145-1425</li>
+            </ul>
+          </div>
+
+           <div className="ct email flex items-center">
+            <FontAwesomeIcon icon={faEnvelope} className="text-gray-700 size-6" />
+            <ul>
+              <li className="sp-contact-time "><strong>Call Us</strong></li>
+              <li className="sp-contact-email">222-145-1425</li>
+            </ul>
+          </div>
+
+           <div className="ct add flex items-center">
+            <FontAwesomeIcon icon={faLocationDot} className="text-gray-700 size-6" />
+            <ul>
+              <li className="sp-contact-time "><strong>Call Us</strong></li>
+              <li className="sp-contact-email">222-145-1425</li>
+            </ul>
+          </div>
+        </div>
+        
+      </div>
+      <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+
         <div className="flex lg:hidden">
           <button
             type="button"
@@ -195,6 +230,7 @@ export default function Header() {
           </div>
         </DialogPanel>
       </Dialog>
+      </div>
     </header>
   )
 }

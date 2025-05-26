@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import styles from 'header.module.css';
+import  './header.module.css';
 import {
   Dialog,
   DialogPanel,

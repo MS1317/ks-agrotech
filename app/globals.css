@@ -44,3 +44,11 @@ body {
 .second-name{
     color: var(--logo-backward);
 }
+
+.right-triangle{
+  background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgb(20 20 20)), url("../public/images/underConstruction/farm.jpg");
+}
+
+.webpage{
+    background-image: linear-gradient(rgb(4 18 33), rgb(4 18 33 / 64%)), url("../public/images/underConstruction/tractor-6558007_1920.jpg");
+}

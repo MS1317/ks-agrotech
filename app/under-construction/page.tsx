@@ -35,8 +35,8 @@ const secondPart = rest.join(" ");
 
 
     return (
-            <div className={styles.webpage}>
-                <div className={styles['right-triangle']}></div>
+            <div className={`${styles.webpage} webpage`}>
+                <div className={`${styles['right-triangle']} right-triangle`}></div>
                 <div className={styles.main}>
                 {LOGO_SRC ?(
                     <Image 

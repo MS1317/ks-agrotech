@@ -3,6 +3,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --logo-forward: white;
+  --logo-backward: #ffb923;
 }
 
 @theme inline {
@@ -19,8 +21,26 @@
   }
 }
 
+.maintenance-mode{
+    overflow: hidden;
+  height: 100%;
+  background: linear-gradient(rgba(211, 219, 242, 0.8), rgba(211, 219, 242, 0.95)), url("../public/images/underConstruction/tractor-6558007_1920.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.first-name{
+    color: var(--logo-forward);
+}
+
+.second-name{
+    color: var(--logo-backward);
 }

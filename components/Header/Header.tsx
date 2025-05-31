@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import  './header.module.css';
+import styles from './header.module.css'; // Correct
 import {
   Dialog,
   DialogPanel,
@@ -27,6 +27,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import Image from 'next/image';
 
 const products = [
   { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
@@ -44,12 +45,12 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className='fixed header w-full z-40'>
+    <header className='fixed header w-full z-100000'>
       <div className="container mx-auto header-content">
               <div className="details container mx-auto flex max-w-7xl p-6 lg:px-8 ">
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
-            <span className="font-bold">K.S Agrotech</span>
+          <a href="#" className={`-m-1.5 p-1.5 ${styles.logo}`}>
+            <span className="font-bold"><span>K.S </span>Agrotech</span>
             {/* <img
               alt=""
               src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
@@ -163,7 +164,7 @@ export default function Header() {
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <img
+              <Image
                 alt=""
                 src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
                 className="h-8 w-auto"

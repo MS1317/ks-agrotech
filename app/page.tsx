@@ -1,5 +1,7 @@
 import Image from "next/image";
 import "../components/Hero/hero.module.css";
+import "../components/Header/header.module.css"
+
 
 export default function Home() {
   return (

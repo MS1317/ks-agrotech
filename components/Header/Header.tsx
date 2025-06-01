@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import styles from './header.module.css'; // Correct
+// import styles from './header.module.css'; 
 import {
   Dialog,
   DialogPanel,
@@ -26,8 +26,11 @@ import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+// import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
+import Link from 'next/link';
+import { LOGO_SRC, LOGO_ALT, SITE_NAME } from '../../lib/constants';
+import React from 'react';
 
 const products = [
   { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
@@ -41,47 +44,33 @@ const callsToAction = [
   { name: 'Contact sales', href: '#', icon: PhoneIcon },
 ]
 
+const [firstPart, ...rest] = SITE_NAME.split(" ");
+const secondPart = rest.join(" ");   
+
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className='fixed header w-full z-100000'>
+    <header className='fixed header w-full z-10'>
       <div className="container mx-auto header-content">
-              <div className="details container mx-auto flex max-w-7xl p-6 lg:px-8 ">
-        <div className="flex lg:flex-1">
-          <a href="#" className={`-m-1.5 p-1.5 ${styles.logo}`}>
-            <span className="font-bold"><span>K.S </span>Agrotech</span>
-            {/* <img
-              alt=""
-              src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-              className="h-8 w-auto"
-            /> */}
-          </a>
-        </div>
+              <div className="details container mx-auto flex max-w-7xl p-6 lg:px-8 justify-end">
+
         <div className="ct-dt flex flex-row ">
           <div className="ct ph flex items-center">
-            <FontAwesomeIcon icon={faPhone} className="text-gray-700 size-6" />
-            <ul>
-              <li className="sp-contact-time "><strong>Call Us</strong></li>
-              <li className="sp-contact-email">222-145-1425</li>
+            <FontAwesomeIcon icon={faPhone} className=" size-6" />
+            <ul>             
+              <li className="sp-contact-email">9915360666</li>
             </ul>
           </div>
 
            <div className="ct email flex items-center">
-            <FontAwesomeIcon icon={faEnvelope} className="text-gray-700 size-6" />
+            <FontAwesomeIcon icon={faEnvelope} className=" size-6" />
             <ul>
-              <li className="sp-contact-time "><strong>Call Us</strong></li>
-              <li className="sp-contact-email">222-145-1425</li>
+                
+              <li className="sp-contact-email">ksagrotech5@gmail.com</li>
             </ul>
           </div>
 
-           <div className="ct add flex items-center">
-            <FontAwesomeIcon icon={faLocationDot} className="text-gray-700 size-6" />
-            <ul>
-              <li className="sp-contact-time "><strong>Call Us</strong></li>
-              <li className="sp-contact-email">222-145-1425</li>
-            </ul>
-          </div>
         </div>
         
       </div>
@@ -97,9 +86,29 @@ export default function Header() {
             <Bars3Icon aria-hidden="true" className="size-6" />
           </button>
         </div>
+
+                <div className="flex lg:flex-1">
+          <div className={`-m-1.5 p-1.5`}>
+             {LOGO_SRC ?(
+                <Image 
+                        src={LOGO_SRC}
+                        alt={LOGO_ALT}
+                        width={150}
+                        height={150}
+                        />
+                ):(
+                    <Link href="/" className="logo">
+                        <span className="font-bold">
+                            <span className="first-name">{firstPart} </span>
+                            <span className="second-name">{secondPart}</span>
+                        </span>
+                    </Link>
+                )}
+          </div>
+        </div>
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
           <Popover className="relative">
-            <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900">
+            <PopoverButton className="flex items-center gap-x-1  text-base font-bold">
               Product
               <ChevronDownIcon aria-hidden="true" className="size-5 flex-none text-gray-400" />
             </PopoverButton>
@@ -112,13 +121,13 @@ export default function Header() {
                 {products.map((item) => (
                   <div
                     key={item.name}
-                    className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-gray-50"
+                    className="group relative flex items-center gap-x-6 rounded-lg p-4  text-base hover:bg-gray-50"
                   >
                     <div className="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                       <item.icon aria-hidden="true" className="size-6 text-gray-600 group-hover:text-indigo-600" />
                     </div>
                     <div className="flex-auto">
-                      <a href={item.href} className="block font-semibold text-gray-900">
+                      <a href={item.href} className="block font-bold text-gray-900">
                         {item.name}
                         <span className="absolute inset-0" />
                       </a>
@@ -132,7 +141,7 @@ export default function Header() {
                   <a
                     key={item.name}
                     href={item.href}
-                    className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100"
+                    className="flex items-center justify-center gap-x-2.5 p-3  text-base font-bold text-gray-900 hover:bg-gray-100"
                   >
                     <item.icon aria-hidden="true" className="size-5 flex-none text-gray-400" />
                     {item.name}
@@ -142,34 +151,32 @@ export default function Header() {
             </PopoverPanel>
           </Popover>
 
-          <a href="#" className="text-sm/6 font-semibold text-gray-900">
+          <a href="#" className=" text-base font-bold ">
             Features
           </a>
-          <a href="#" className="text-sm/6 font-semibold text-gray-900">
+          <a href="#" className=" text-base font-bold ">
             Marketplace
           </a>
-          <a href="#" className="text-sm/6 font-semibold text-gray-900">
+          <a href="#" className=" text-base font-bold ">
             Company
           </a>
         </PopoverGroup>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm/6 font-semibold text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
-        </div>
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
         <div className="fixed inset-0 z-10" />
         <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
+            <Link
+             href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <Image
                 alt=""
                 src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
                 className="h-8 w-auto"
+                width="50"
+                height="50"
               />
-            </a>
+            </Link>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
@@ -183,7 +190,7 @@ export default function Header() {
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                 <Disclosure as="div" className="-mx-3">
-                  <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">
+                  <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-bold text-gray-900 hover:bg-gray-50">
                     Product
                     <ChevronDownIcon aria-hidden="true" className="size-5 flex-none group-data-open:rotate-180" />
                   </DisclosureButton>
@@ -193,7 +200,7 @@ export default function Header() {
                         key={item.name}
                         as="a"
                         href={item.href}
-                        className="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50"
+                        className="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-bold text-gray-900 hover:bg-gray-50"
                       >
                         {item.name}
                       </DisclosureButton>
@@ -202,19 +209,19 @@ export default function Header() {
                 </Disclosure>
                 <a
                   href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-bold text-gray-900 hover:bg-gray-50"
                 >
                   Features
                 </a>
                 <a
                   href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-bold text-gray-900 hover:bg-gray-50"
                 >
                   Marketplace
                 </a>
                 <a
                   href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-bold text-gray-900 hover:bg-gray-50"
                 >
                   Company
                 </a>
@@ -222,7 +229,7 @@ export default function Header() {
               <div className="py-6">
                 <a
                   href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-bold text-gray-900 hover:bg-gray-50"
                 >
                   Log in
                 </a>

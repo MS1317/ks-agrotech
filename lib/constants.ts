@@ -1,4 +1,4 @@
-export const MAINTENANCE_MODE = true; // Set to true to enable maintenance mode
+export const MAINTENANCE_MODE = false; // Set to true to enable maintenance mode
 export const LOGO_SRC = '';
 export const LOGO_ALT = 'Logo';
 export const SITE_NAME = 'K.S. Agrotech';

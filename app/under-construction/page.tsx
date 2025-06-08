@@ -61,7 +61,7 @@ const secondPart = rest.join(" ");
 
                     <div className={styles.contact}>
                         <canvas id="dotlottie-canvas" style={{ width: '50px', height: '50px' }}></canvas>
-                        <a className={styles.tel} href="tel: 09915360666">- &nbsp; 09915360666</a>
+                        <a className={styles.tel} href="tel: 09915360666">- &nbsp; 099153 60666</a>
                     </div>
                 </div>
             </div>

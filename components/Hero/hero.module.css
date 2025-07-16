@@ -3,3 +3,10 @@
     height: 100%;
     width: 100%;
 }
+
+.highlights{
+    font-size: 12px;
+    font-weight: 400;
+    color: #ffffff;
+    margin-block: clamp(1rem, 0.5vw + 0.25rem, 3rem);
+}

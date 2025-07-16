@@ -74,7 +74,7 @@ export default function Header() {
         </div>
         
       </div>
-      <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+      <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8 backdrop-blur-lg ">
 
         <div className="flex lg:hidden">
           <button
@@ -98,7 +98,7 @@ export default function Header() {
                         />
                 ):(
                     <Link href="/" className="logo">
-                        <span className="font-bold">
+                        <span className="font-bold drop-shadow-xl">
                             <span className="first-name">{firstPart} </span>
                             <span className="second-name">{secondPart}</span>
                         </span>
@@ -108,9 +108,9 @@ export default function Header() {
         </div>
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
           <Popover className="relative">
-            <PopoverButton className="flex items-center gap-x-1  text-base font-bold">
+            <PopoverButton className="flex items-center gap-x-1  text-base font-bold text-gray-950">
               Product
-              <ChevronDownIcon aria-hidden="true" className="size-5 flex-none text-gray-400" />
+              <ChevronDownIcon aria-hidden="true" className="size-5 flex-none text-gray-950" />
             </PopoverButton>
 
             <PopoverPanel
@@ -151,13 +151,13 @@ export default function Header() {
             </PopoverPanel>
           </Popover>
 
-          <a href="#" className=" text-base font-bold ">
+          <a href="#" className=" text-base font-bold text-gray-950">
             Features
           </a>
-          <a href="#" className=" text-base font-bold ">
+          <a href="#" className=" text-base font-bold text-gray-950">
             Marketplace
           </a>
-          <a href="#" className=" text-base font-bold ">
+          <a href="#" className=" text-base font-bold text-gray-950">
             Company
           </a>
         </PopoverGroup>

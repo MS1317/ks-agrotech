@@ -5,7 +5,7 @@ import Hero from '../components/Hero/hero';
 import Stats from '../components/Stats/stats';
 
 
-export default function LayoutClient({ children }: { children: React.ReactNode }) {
+export default function LayoutClient({ }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isUnderConstruction = pathname === '/under-construction';
 

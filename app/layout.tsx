@@ -25,7 +25,7 @@ export default function RootLayout({
   const bodyClassName = `${MAINTENANCE_MODE ? "maintenance-mode" : ""}`;
  return (
     <html lang="en" className={`${rajdhani.variable} ${bodyClassName}`}>
-      <body className={`rajdhani-font antialiased ${bodyClassName}`}>
+      <body className={`rajdhani-font antialiased bgColor ${bodyClassName}`}>
         <LayoutClient>{children}</LayoutClient>
       </body>
     </html>

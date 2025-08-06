@@ -7,6 +7,7 @@
   --logo-backward: #035196;
   --navbar-background: rgba(255, 255, 255, 0.618);
   --font-family: var(--font-rajdhani),sans-serif;
+  --lightblue: #527a9d;
 }
 
 h1{
@@ -51,7 +52,7 @@ h6{
 }
 
 body {
-  background: var(--background);
+  background: var(--foreground);
   color: var(--foreground);
   font-family: var(--font-rajdhani);
 }

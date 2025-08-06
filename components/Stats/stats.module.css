@@ -1,0 +1,43 @@
+.info{
+    background-color: var(--lightblue);
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: clamp(1rem, 2vw, 2rem);
+}
+
+.info h2{
+    color: #000000;
+}
+
+.stats-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.statsCount{
+    min-width: 300px;
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+}
+
+.box{
+    color: var(--background);
+    border: 1px solid var(--lightblue);
+    flex: 1;
+    flex-wrap: nowrap;
+    flex-basis: 50%;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(1rem, 2vw, 2rem);
+    display: flex;
+    gap: clamp(0.5rem, 1vw, 1rem);
+}
+

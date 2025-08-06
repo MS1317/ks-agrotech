@@ -2,6 +2,8 @@
 import { usePathname } from 'next/navigation';  
 import Header from '../components/Header/Header';
 import Hero from '../components/Hero/hero';
+import Stats from '../components/Stats/stats';
+
 
 export default function LayoutClient({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -11,7 +13,7 @@ export default function LayoutClient({ children }: { children: React.ReactNode }
     <>
       {!isUnderConstruction && <Header />}
       {!isUnderConstruction && <Hero />}
-      {children}
+      {!isUnderConstruction && <Stats />}
     </>
   );
 }

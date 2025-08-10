@@ -5,9 +5,12 @@
   --foreground: #ffffff;
   --logo-forward: #035196;
   --logo-backward: #035196;
-  --navbar-background: rgba(255, 255, 255, 0.618);
+  --navbar-background: rgba(255, 255, 255, 0.7);
   --font-family: var(--font-rajdhani),sans-serif;
   --lightblue: #527a9d;
+  --highlighted-text: #f1d30d;
+  --section-heading: #035196;
+  --section-subheading: #000000;
 }
 
 h1{
@@ -28,6 +31,8 @@ h5{
 h6{
   font-size: clamp(1.125rem, 0.25vw + 0.0625rem, 1.5rem);
 }
+
+
 
 @theme inline {
   --color-background: var(--background);

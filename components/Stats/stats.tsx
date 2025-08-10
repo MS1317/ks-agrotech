@@ -7,9 +7,9 @@ export default function Stats() {
         <section className="stats-sec container-fluid">
             <div className={`${style["stats-container"]} container mx-auto`}>
                 <div className={`${style.info} h-100`}>
-                    <h3>Our Proud</h3>
-                    <h2>25 years of undefeated success</h2>
-                    <p>We have a long and proud history givin emphasis to environment social and economic outcomes to deliver places that respond.</p>
+                    <h3 className="font-semibold">Our Proud</h3>
+                    <h2 className="font-bold">25 years of undefeated success</h2>
+                    <p className="font-normal">We have a long and proud history givin emphasis to environment social and economic outcomes to deliver places that respond.</p>
                 </div>
                 <div className={`${style.statsCount} h-100`}>
                     <div className={style.box}>
@@ -17,8 +17,8 @@ export default function Stats() {
                             <FontAwesomeIcon icon={faUser}/>
                         </div>
                         <div>
-                            <h1 className="text-center">0</h1>
-                            <p>Awards</p>
+                            <h1 className="text-center font-bold">0</h1>
+                            <p className="font-semibold">Awards</p>
                         </div>
                     </div>
 
@@ -27,8 +27,8 @@ export default function Stats() {
                             <FontAwesomeIcon icon={faUser}/>
                         </div>
                         <div>
-                            <h1 className="text-center">0</h1>
-                            <p>Parts Produced</p>
+                            <h1 className="text-center font-bold">0</h1>
+                            <p className="font-semibold">Parts Produced</p>
                         </div>
                     </div>
 
@@ -37,8 +37,8 @@ export default function Stats() {
                             <FontAwesomeIcon icon={faUser}/>
                         </div>
                         <div>
-                            <h1 className="text-center">0</h1>
-                            <p>Ship Repair</p>
+                            <h1 className="text-center font-bold">0</h1>
+                            <p className="font-semibold">Ship Repair</p>
                         </div>
                     </div>
                     
@@ -47,8 +47,8 @@ export default function Stats() {
                             <FontAwesomeIcon icon={faUser}/>
                         </div>
                         <div>
-                            <h1 className="text-center">0</h1>
-                            <p>Dedicated Customers</p>
+                            <h1 className="text-center font-bold">0</h1>
+                            <p className="font-semibold">Dedicated Customers</p>
                         </div>
                     </div>
                 </div>

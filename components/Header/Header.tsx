@@ -53,7 +53,7 @@ export default function Header() {
   return (
     <header className='fixed header w-full z-10'>
       <div className="container mx-auto header-content">
-              <div className="details container mx-auto flex max-w-7xl p-6 lg:px-8 justify-end">
+        <div className="details container mx-auto flex  p-6 lg:px-8 justify-end">
 
         <div className="ct-dt flex flex-row ">
           <div className="ct ph flex items-center">
@@ -72,11 +72,11 @@ export default function Header() {
           </div>
 
         </div>
-        
-      </div>
-      <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8 backdrop-blur-lg ">
 
-        <div className="flex lg:hidden">
+      </div>
+      <nav aria-label="Global" className="mx-auto flex items-center justify-between p-6 lg:px-8 backdrop-blur-lg ">
+
+        <div className="flex lg:hidden order-1">
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}

@@ -1,0 +1,48 @@
+.ctaSection {
+    display: flex; 
+    justify-content: space-between;
+    flex: 1;
+}
+ .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 20px;
+}
+.ctaContainer1 .overlay {
+    background-color: rgba(245,185,55,0.82);
+}
+.ctaContainer2 .overlay {
+    background-color: rgba(32,44,68,0.79);
+}
+.info{
+    max-width: 600px;
+}
+.ctaContainer1{
+    position: relative;
+    width: 100%;
+    background-image: url("../../public/images/Home/CTA/ab1.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: clamp(50px, 6vw, 150px);
+}
+.ctaContainer1 h4{
+    font-weight: 700;
+}
+.ctaContainer2{
+    position: relative;
+    width: 100%;
+    background-image: url("../../public/images/Home/CTA/ab1.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: clamp(50px, 5vw, 100px);
+}

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import {Rajdhani } from "next/font/google";
-import "./globals.css";
+import "./styles/globals.css";
 import '@fortawesome/fontawesome-svg-core/styles.css'; // Import the CSS
 import { config } from '@fortawesome/fontawesome-svg-core';
 import LayoutClient from "./LayoutClient";

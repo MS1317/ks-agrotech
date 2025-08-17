@@ -5,6 +5,7 @@ import Hero from '../components/Hero/hero';
 import Stats from '../components/Stats/stats';
 import Services from '../components/Services/services';
 import CTA from '../components/CTA/cta';
+import Teams from '../components/Team/teams';
 
 
 export default function LayoutClient({ }: { children: React.ReactNode }) {
@@ -18,6 +19,7 @@ export default function LayoutClient({ }: { children: React.ReactNode }) {
       {!isUnderConstruction && <Stats />}
       {!isUnderConstruction && <Services />}
       {!isUnderConstruction && <CTA />}
+      {!isUnderConstruction && <Teams />}
     </>
   );
 }

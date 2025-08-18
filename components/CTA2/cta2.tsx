@@ -3,16 +3,6 @@ import React, { useEffect, useState } from "react";
 import style from "./cta.module.css";
 
 export const CTA2 = () => {
-    const [scrollY, setScrollY] = useState(0);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrollY(window.scrollY);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
     return (
         <section className={style.ctaSection}>

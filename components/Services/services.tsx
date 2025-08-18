@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./services.module.css";
+import Image from "next/image";
 
 const serviceArray=[
     {
@@ -53,7 +54,7 @@ export default function Services(){
                     {serviceArray.map((service,index)=>{
                         return (
                             <div key={index} className={style.serviceBox}>
-                                <img src={service.img.props.src} alt={service.img.props.alt} />
+                                <Image src={service.img.props.src} alt={service.img.props.alt} />
                                 <div className={style.serviceInfo}>
                                     <div>
                                         {service.icon}

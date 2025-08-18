@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./teams.module.css";
+import Image from "next/image";
 
 const teamsArray = [
     {
@@ -46,10 +47,12 @@ export default function Teams() {
                         return (
                             <div key={index} className={style.teamBox}>
                                 <div className={`${style.teamMemberOverlay} aspect-square`}>
-                                    <img 
-                                        className={style.teamImage} 
-                                        src={team.img} 
-                                        alt={team.name} 
+                                    <Image
+                                        className={style.teamImage}
+                                        src={team.img}
+                                        alt={team.name}
+                                        width={500}
+                                        height={500}
                                     />
                                     <div className={style.overlay}>
                                         <div className={style.contactProfiles}>

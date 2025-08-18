@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./testimonials.module.css";
+import Image from "next/image";
 
 const testimonialArray = [
     {
@@ -43,7 +44,7 @@ const Testimonial: React.FC = () => {
             <div className={styles.testimonialContainer}>
                 {/* Header */}
                 <div className={styles.header}>
-                    <span className={styles.subtitle}>Client's Love</span>
+                    <span className={styles.subtitle}>Client Love</span>
                     <div className={styles.underline}></div>
                     <h2 className={styles.title}>Testimonials</h2>
                 </div>
@@ -62,14 +63,16 @@ const Testimonial: React.FC = () => {
                             {testimonialArray.map((testimonial, index) => (
                                 <div key={index} className={styles.testimonialCard}>
                                     <div className={styles.testimonialText}>
-                                        <p>"{testimonial.text}"</p>
+                                        <p>{testimonial.text}</p>
                                     </div>
 
                                     <div className={styles.authorSection}>
                                         <div className={styles.authorImage}>
-                                            <img
+                                            <Image
                                                 src={testimonial.image}
                                                 alt={testimonial.author}
+                                                width={150}
+                                                height={150}
                                             />
                                         </div>
                                         <div className={styles.authorInfo}>

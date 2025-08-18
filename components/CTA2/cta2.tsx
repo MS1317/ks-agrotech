@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import style from "./cta.module.css";
 
 export const CTA2 = () => {
@@ -8,9 +8,6 @@ export const CTA2 = () => {
         <section className={style.ctaSection}>
             <div 
                 className={style.parallaxBackground}
-                // style={{
-                //     transform: `translateY(${scrollY * 0.5}px)`
-                // }}
             ></div>
             <div className={style.overlay}></div>
             

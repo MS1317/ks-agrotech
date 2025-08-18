@@ -59,14 +59,14 @@ export default function Teams() {
                                             {team.phone && (
                                                 <div className={style.contactItem}>
                                                     <a href={`tel:${team.phone}`}>
-                                                        <img src="../images/Home/Team/phone.png" alt="Phone" />
+                                                        <Image src="../images/Home/Team/phone.png" alt="Phone" />
                                                     </a>
                                                 </div>
                                             )}
                                             {team.email && (
                                                 <div className={style.contactItem}>
                                                     <a href={`mailto:${team.email}`}>
-                                                        <img src="../images/Home/Team/gmail.png" alt="Email" />
+                                                        <Image src="../images/Home/Team/gmail.png" alt="Email" />
                                                     </a>
                                                 </div>
                                             )}

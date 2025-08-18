@@ -6,38 +6,38 @@ const serviceArray=[
     {
         title: "Support Center",
         description: "24/7 customer support",
-        icon: <Image className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Support Center" />,
-        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Support Center" />
+        icon: <Image width={500} height={300} className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Support Center" />,
+        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Support Center" width={500} height={300} />
     },
     {
         title: "Rebuild",
         description: "Rebuild your infrastructure",
-        icon: <Image className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Rebuild" />,
-        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Rebuild" />
+        icon: <Image width={500} height={300} className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Rebuild" />,
+        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Rebuild" width={500} height={300} />
     },
     {
         title: "Efficiency Upgrade",
         description: "Upgrade your systems for better performance",
-        icon: <Image className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
-        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" />
+        icon: <Image width={500} height={300} className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
+        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" width={500} height={300} />
     },
     {
         title: "Efficiency Upgrade",
         description: "Upgrade your systems for better performance",
-        icon: <Image className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
-        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" />
+        icon: <Image width={500} height={300} className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
+        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" width={500} height={300} />
     },
     {
         title: "Efficiency Upgrade",
         description: "Upgrade your systems for better performance",
-        icon: <Image className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
-        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" />
+        icon: <Image width={500} height={300} className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
+        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" width={500} height={300} />
     },
     {
         title: "Efficiency Upgrade",
         description: "Upgrade your systems for better performance",
-        icon: <Image className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
-        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" />
+        icon: <Image width={500} height={300} className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
+        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" width={500} height={300} />
     }
 ]
 
@@ -54,7 +54,7 @@ export default function Services(){
                     {serviceArray.map((service,index)=>{
                         return (
                             <div key={index} className={style.serviceBox}>
-                                <Image src={service.img.props.src} alt={service.img.props.alt} />
+                                <Image width={500} height={300} src={service.img.props.src} alt={service.img.props.alt} />
                                 <div className={style.serviceInfo}>
                                     <div>
                                         {service.icon}

@@ -1,24 +1,29 @@
-import Image from "next/image";
-import "../components/Hero/hero.module.css";
-import "../components/Header/header.module.css"
+'use client';
 
+import Hero from '../components/Hero/hero';
+import Stats from '../components/Stats/stats';
+import Services from '../components/Services/services';
+import CTA from '../components/CTA/cta';
+import Teams from '../components/Team/teams';
+import { FAQ } from '../components/FAQ/faq';
+import { Projects } from '../components/Projects/projects';
+import { CTA2 } from '../components/CTA2/cta2';
+import Process from '../components/Process/process';
+import Testimonial from '../components/Testimonial/testimonial';
 
 export default function Home() {
   return (
-              <a
-            className="absolute bottom-0 right-0 rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/ms1317s-projects"
-            target="_blank"
-            rel="noopener noreferrer"
-            >
-              <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
+          <>
+          <Hero />
+          <Stats />
+          <Services />
+          <CTA />
+          <Teams />
+          <FAQ />
+          <Projects />
+          <CTA2 />
+          <Process />
+          <Testimonial />
+        </>
   );
 }

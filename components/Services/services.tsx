@@ -42,7 +42,7 @@ const serviceArray=[
 
 export default function Services(){
     return(
-        <section className="services-sec container-fluid">
+        <section className={`${style.servicesSec} container-fluid`}>
             <div className={`${style["services-container"]} container mx-auto`}>
                 <div className={`${style.info}`}>
                     <h6 className="font-semibold text-center">Our Services</h6>

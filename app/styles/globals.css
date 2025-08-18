@@ -8,7 +8,7 @@
   --theme: #035196;
   --navbar-background: rgba(255, 255, 255, 0.7);
   --font-family: var(--font-rajdhani),sans-serif;
-  --lightblue: #527a9d;
+  --lightblue: linear-gradient(135deg, #4a90e2, #5ba3f5);
   --highlighted-text: #f1d30d;
   --section-heading: #035196;
   --section-subheading: #000000;

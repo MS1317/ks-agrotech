@@ -1,5 +1,5 @@
 export const MAINTENANCE_MODE = false; // Set to true to enable maintenance mode
-export const LOGO_SRC = '';
+export const LOGO_SRC = '/images/Logo.png';
 export const LOGO_ALT = 'Logo';
 export const SITE_NAME = 'K.S. Agrotech';
 export const SITE_DESCRIPTION = 'K.S. Agrotech - Your partner in agricultural innovation and excellence.';

@@ -21,7 +21,7 @@
     background-color: rgba(245,185,55,0.82);
 }
 .ctaContainer2 .overlay {
-    background-color: rgba(32,44,68,0.79);
+    background: linear-gradient(135deg, #4a91e2, #5ba3f5c0);
 }
 .info{
     max-width: 600px;
@@ -44,4 +44,13 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+@media (max-width: 768px) {
+  /* Styles for mobile devices */
+
+  .ctaSection{
+    flex-wrap: wrap;
+  }
+
 }

@@ -53,7 +53,7 @@ export default function Header() {
   return (
     <header className='fixed header w-full z-10'>
       <div className="container mx-auto header-content">
-        <div className="details container mx-auto flex  p-6 lg:px-8 justify-end">
+        <div className="hidden details container mx-auto flex  p-6 lg:px-8 justify-end">
 
         <div className="ct-dt flex flex-row ">
           <div className="ct ph flex items-center">
@@ -87,19 +87,31 @@ export default function Header() {
           </button>
         </div>
 
-                <div className="flex lg:flex-1">
+        <div className="flex lg:flex-1">
           <div className={`-m-1.5 p-1.5`}>
              {LOGO_SRC ?(
-                <Image 
-                        src={LOGO_SRC}
-                        alt={LOGO_ALT}
-                        width={150}
-                        height={150}
-                        />
-                ):(
-                    <Link href="/" className="logo">
-                        <span className="font-bold drop-shadow-xl">
-                            <span className="first-name">{firstPart} </span>
+              <Link href="/" className="logo">
+                <Image
+                  src={LOGO_SRC}
+                  alt={LOGO_ALT}
+                  width={70}
+                  height={70}
+                />
+              </Link>
+            ):(
+                <Link href="/" className="logo">
+                    <span className="font-bold drop-shadow-xl">
+                        <span className="first-name">{firstPart} </span>
+                        <span className="second-name">{secondPart}</span>
+                    </span>
+                </Link>
+            )}
+          </div>
+        </div>
+        <PopoverGroup className="hidden lg:flex lg:gap-x-12">
+          {/* <Popover className="relative">
+            <PopoverButton className="flex items-center gap-x-1  text-base font-bold text-gray-950">
+              Product
                             <span className="second-name">{secondPart}</span>
                         </span>
                     </Link>
@@ -107,7 +119,7 @@ export default function Header() {
           </div>
         </div>
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
-          <Popover className="relative">
+          {/* <Popover className="relative">
             <PopoverButton className="flex items-center gap-x-1  text-base font-bold text-gray-950">
               Product
               <ChevronDownIcon aria-hidden="true" className="size-5 flex-none text-gray-950" />
@@ -149,16 +161,13 @@ export default function Header() {
                 ))}
               </div>
             </PopoverPanel>
-          </Popover>
+          </Popover> */}
 
-          <a href="#" className=" text-base font-bold text-gray-950">
-            Features
+          <a href="/about" className=" text-base font-bold text-gray-950">
+            About
           </a>
-          <a href="#" className=" text-base font-bold text-gray-950">
-            Marketplace
-          </a>
-          <a href="#" className=" text-base font-bold text-gray-950">
-            Company
+          <a href="/contact" className=" text-base font-bold text-gray-950">
+            Contact
           </a>
         </PopoverGroup>
       </nav>

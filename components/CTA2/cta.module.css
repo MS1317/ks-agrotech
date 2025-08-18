@@ -1,0 +1,185 @@
+/* cta.module.css */
+
+.ctaSection {
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.parallaxBackground {
+    position: absolute;
+    top: -20%;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    background-image: url('../../public/images/Home/CTA2/counter-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    will-change: transform;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 40px;
+    color: white;
+}
+
+.textContent {
+    flex: 1;
+    max-width: 600px;
+}
+
+.textContent h2 {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0 0 15px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.textContent p {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0;
+    opacity: 0.9;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.ctaButton {
+    flex-shrink: 0;
+    margin-left: 40px;
+}
+
+
+.contactBtn {
+    background: linear-gradient(135deg, #4a90e2, #5ba3f5);
+    color: white;
+    padding: 16px 32px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(74, 144, 226, 0.4);
+}
+
+.contactBtn:hover {
+    background: linear-gradient(135deg, #4a90e2, #5ba3f5);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(74, 144, 226, 0.6);
+}
+
+.contactBtn:active {
+    transform: translateY(-1px);
+}
+
+.star {
+    font-size: 20px;
+    animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2) rotate(180deg);
+        opacity: 0.8;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .content {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+        padding: 0 30px;
+    }
+    
+    .ctaButton {
+        margin-left: 0;
+    }
+    
+    .textContent h2 {
+        font-size: 28px;
+    }
+    
+    .textContent p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .ctaSection {
+        height: 350px;
+    }
+    
+    .content {
+        padding: 0 20px;
+    }
+    
+    .textContent h2 {
+        font-size: 24px;
+    }
+    
+    .textContent p {
+        font-size: 15px;
+    }
+    
+    .contactBtn {
+        padding: 14px 28px;
+        font-size: 16px;
+    }
+    
+    .parallaxBackground {
+        background-attachment: scroll;
+    }
+}
+
+@media (max-width: 480px) {
+    .ctaSection {
+        height: 300px;
+    }
+    
+    .textContent h2 {
+        font-size: 20px;
+        line-height: 1.4;
+    }
+    
+    .textContent p {
+        font-size: 14px;
+    }
+    
+    .contactBtn {
+        padding: 12px 24px;
+        font-size: 15px;
+    }
+}

@@ -1,5 +1,8 @@
+.statsSec{
+    background-color: #f8f9fa;
+}
 .info{
-    background-color: var(--lightblue);
+    background: var(--lightblue);
     flex: 1;
     min-width: 300px;
     display: flex;

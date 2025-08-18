@@ -11,7 +11,7 @@ const CTA = () => {
                     <p className={style.ctaDescription}>
                         Join us today and take advantage of our exclusive offers.
                     </p>
-                    <button className={style.ctaButton}>Get Started</button>
+                    {/* <button className={style.ctaButton}>Get Started</button> */}
                 </div>
             </div> 
         </div>
@@ -23,7 +23,7 @@ const CTA = () => {
                     <p className={style.ctaDescription}>
                         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati architecto suscipit facere perspiciatis autem corrupti repudiandae fugit, quos tempore ratione! Incidunt, at quam. Dolore veniam repellat rerum laboriosam delectus obcaecati.
                     </p>
-                    <button className={style.ctaButton}>Get Started</button>
+                    {/* <button className={style.ctaButton}>Get Started</button> */}
                 </div>
             </div>
         </div>  

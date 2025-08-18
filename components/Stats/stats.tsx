@@ -4,7 +4,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function Stats() {
     return (
-        <section className="stats-sec container-fluid">
+        <section className={`${style.statsSec} container-fluid`}>
             <div className={`${style["stats-container"]} container mx-auto`}>
                 <div className={`${style.info} h-100`}>
                     <h3 className="font-semibold">Our Proud</h3>

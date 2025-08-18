@@ -6,28 +6,28 @@ const teamsArray = [
     {
         name: "Rory Burns",
         designation: "Chief Engineer",
-        img: "../images/Home/Team/T7.jpg",
+        img: "/images/Home/Team/T7.jpg",
         phone: "+123456789",
         email: "rory.burns@example.com"
     },
     {
         name: "Bernie Kowalczyk",
         designation: "Engineer",
-        img: "../images/Home/Team/T7.jpg",
+        img: "/images/Home/Team/T7.jpg",
         phone: "+123456789",
         email: "bernie.kowalczyk@example.com"
     },
     {
         name: "Tryphena Roberts",
         designation: "Engineer",
-        img: "../images/Home/Team/T7.jpg",
+        img: "/images/Home/Team/T7.jpg",
         phone: "+123456789",
         email: "tryphena.roberts@example.com"
     },
     {
         name: "Arlo Norwood",
         designation: "Engineer",
-        img: "../images/Home/Team/T7.jpg",
+        img: "/images/Home/Team/T7.jpg",
         phone: "+123456789",
         email: "arlo.norwood@example.com"
     },

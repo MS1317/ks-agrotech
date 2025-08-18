@@ -6,38 +6,38 @@ const serviceArray=[
     {
         title: "Support Center",
         description: "24/7 customer support",
-        icon: <Image className={style.servImg} src={"../images/Home/services/industrial-robot.png"} alt="Support Center" />,
-        img: <Image src={"../images/Home/services/sv1.jpg"} alt="Support Center" />
+        icon: <Image className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Support Center" />,
+        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Support Center" />
     },
     {
         title: "Rebuild",
         description: "Rebuild your infrastructure",
-        icon: <Image className={style.servImg} src={"../images/Home/services/industrial-robot.png"} alt="Rebuild" />,
-        img: <Image src={"../images/Home/services/sv1.jpg"} alt="Rebuild" />
+        icon: <Image className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Rebuild" />,
+        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Rebuild" />
     },
     {
         title: "Efficiency Upgrade",
         description: "Upgrade your systems for better performance",
-        icon: <Image className={style.servImg} src={"../images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
-        img: <Image src={"../images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" />
+        icon: <Image className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
+        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" />
     },
     {
         title: "Efficiency Upgrade",
         description: "Upgrade your systems for better performance",
-        icon: <Image className={style.servImg} src={"../images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
-        img: <Image src={"../images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" />
+        icon: <Image className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
+        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" />
     },
     {
         title: "Efficiency Upgrade",
         description: "Upgrade your systems for better performance",
-        icon: <Image className={style.servImg} src={"../images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
-        img: <Image src={"../images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" />
+        icon: <Image className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
+        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" />
     },
     {
         title: "Efficiency Upgrade",
         description: "Upgrade your systems for better performance",
-        icon: <Image className={style.servImg} src={"../images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
-        img: <Image src={"../images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" />
+        icon: <Image className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
+        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" />
     }
 ]
 

@@ -5,44 +5,19 @@ import { useState } from 'react'
 import {
   Dialog,
   DialogPanel,
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Popover,
-  PopoverButton,
   PopoverGroup,
-  PopoverPanel,
 } from '@headlessui/react'
 import {
-  ArrowPathIcon,
   Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
-import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-// import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 import Link from 'next/link';
 import { LOGO_SRC, LOGO_ALT, SITE_NAME } from '../../lib/constants';
 import React from 'react';
-
-const products = [
-  { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
-  { name: 'Engagement', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
-  { name: 'Security', description: 'Your customers’ data will be safe and secure', href: '#', icon: FingerPrintIcon },
-  { name: 'Integrations', description: 'Connect with third-party tools', href: '#', icon: SquaresPlusIcon },
-  { name: 'Automations', description: 'Build strategic funnels that will convert', href: '#', icon: ArrowPathIcon },
-]
-const callsToAction = [
-  { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
-  { name: 'Contact sales', href: '#', icon: PhoneIcon },
-]
 
 const [firstPart, ...rest] = SITE_NAME.split(" ");
 const secondPart = rest.join(" ");   
@@ -53,7 +28,7 @@ export default function Header() {
   return (
     <header className='fixed header w-full z-10'>
       <div className="container mx-auto header-content">
-              <div className="details container mx-auto flex max-w-7xl p-6 lg:px-8 justify-end">
+        <div className="hidden details container mx-auto flex  p-6 lg:px-8 justify-end">
 
         <div className="ct-dt flex flex-row ">
           <div className="ct ph flex items-center">
@@ -72,11 +47,11 @@ export default function Header() {
           </div>
 
         </div>
-        
-      </div>
-      <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
 
-        <div className="flex lg:hidden">
+      </div>
+      <nav aria-label="Global" className="mx-auto flex items-center justify-between p-6 lg:px-8 backdrop-blur-lg ">
+
+        <div className="flex lg:hidden order-1">
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}
@@ -87,78 +62,33 @@ export default function Header() {
           </button>
         </div>
 
-                <div className="flex lg:flex-1">
+        <div className="flex lg:flex-1">
           <div className={`-m-1.5 p-1.5`}>
              {LOGO_SRC ?(
-                <Image 
-                        src={LOGO_SRC}
-                        alt={LOGO_ALT}
-                        width={150}
-                        height={150}
-                        />
-                ):(
-                    <Link href="/" className="logo">
-                        <span className="font-bold">
-                            <span className="first-name">{firstPart} </span>
-                            <span className="second-name">{secondPart}</span>
-                        </span>
-                    </Link>
-                )}
+              <Link href="/" className="logo">
+                <Image
+                  src={LOGO_SRC}
+                  alt={LOGO_ALT}
+                  width={70}
+                  height={70}
+                />
+              </Link>
+            ):(
+                <Link href="/" className="logo">
+                    <span className="font-bold drop-shadow-xl">
+                        <span className="first-name">{firstPart} </span>
+                        <span className="second-name">{secondPart}</span>
+                    </span>
+                </Link>
+            )}
           </div>
         </div>
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
-          <Popover className="relative">
-            <PopoverButton className="flex items-center gap-x-1  text-base font-bold">
-              Product
-              <ChevronDownIcon aria-hidden="true" className="size-5 flex-none text-gray-400" />
-            </PopoverButton>
-
-            <PopoverPanel
-              transition
-              className="absolute top-full -left-8 z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 transition data-closed:translate-y-1 data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-150 data-leave:ease-in"
-            >
-              <div className="p-4">
-                {products.map((item) => (
-                  <div
-                    key={item.name}
-                    className="group relative flex items-center gap-x-6 rounded-lg p-4  text-base hover:bg-gray-50"
-                  >
-                    <div className="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                      <item.icon aria-hidden="true" className="size-6 text-gray-600 group-hover:text-indigo-600" />
-                    </div>
-                    <div className="flex-auto">
-                      <a href={item.href} className="block font-bold text-gray-900">
-                        {item.name}
-                        <span className="absolute inset-0" />
-                      </a>
-                      <p className="mt-1 text-gray-600">{item.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-                {callsToAction.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="flex items-center justify-center gap-x-2.5 p-3  text-base font-bold text-gray-900 hover:bg-gray-100"
-                  >
-                    <item.icon aria-hidden="true" className="size-5 flex-none text-gray-400" />
-                    {item.name}
-                  </a>
-                ))}
-              </div>
-            </PopoverPanel>
-          </Popover>
-
-          <a href="#" className=" text-base font-bold ">
-            Features
+          <a href="/about" className=" text-base font-bold text-gray-950">
+            About
           </a>
-          <a href="#" className=" text-base font-bold ">
-            Marketplace
-          </a>
-          <a href="#" className=" text-base font-bold ">
-            Company
+          <a href="/contact" className=" text-base font-bold text-gray-950">
+            Contact
           </a>
         </PopoverGroup>
       </nav>
@@ -171,10 +101,10 @@ export default function Header() {
               <span className="sr-only">Your Company</span>
               <Image
                 alt=""
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+                src={LOGO_SRC}
                 className="h-8 w-auto"
-                width="50"
-                height="50"
+                width={70}
+                height={70}
               />
             </Link>
             <button
@@ -189,49 +119,17 @@ export default function Header() {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                <Disclosure as="div" className="-mx-3">
-                  <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-bold text-gray-900 hover:bg-gray-50">
-                    Product
-                    <ChevronDownIcon aria-hidden="true" className="size-5 flex-none group-data-open:rotate-180" />
-                  </DisclosureButton>
-                  <DisclosurePanel className="mt-2 space-y-2">
-                    {[...products, ...callsToAction].map((item) => (
-                      <DisclosureButton
-                        key={item.name}
-                        as="a"
-                        href={item.href}
-                        className="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-bold text-gray-900 hover:bg-gray-50"
-                      >
-                        {item.name}
-                      </DisclosureButton>
-                    ))}
-                  </DisclosurePanel>
-                </Disclosure>
                 <a
-                  href="#"
+                  href="/about"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-bold text-gray-900 hover:bg-gray-50"
                 >
-                  Features
+                  About
                 </a>
                 <a
-                  href="#"
+                  href="/contact"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-bold text-gray-900 hover:bg-gray-50"
                 >
-                  Marketplace
-                </a>
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-bold text-gray-900 hover:bg-gray-50"
-                >
-                  Company
-                </a>
-              </div>
-              <div className="py-6">
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-bold text-gray-900 hover:bg-gray-50"
-                >
-                  Log in
+                  Contact
                 </a>
               </div>
             </div>

@@ -1,0 +1,75 @@
+import React from "react";
+import style from "./services.module.css";
+import Image from "next/image";
+
+const serviceArray=[
+    {
+        title: "Support Center",
+        description: "24/7 customer support",
+        icon: <Image width={500} height={300} className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Support Center" />,
+        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Support Center" width={500} height={300} />
+    },
+    {
+        title: "Rebuild",
+        description: "Rebuild your infrastructure",
+        icon: <Image width={500} height={300} className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Rebuild" />,
+        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Rebuild" width={500} height={300} />
+    },
+    {
+        title: "Efficiency Upgrade",
+        description: "Upgrade your systems for better performance",
+        icon: <Image width={500} height={300} className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
+        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" width={500} height={300} />
+    },
+    {
+        title: "Efficiency Upgrade",
+        description: "Upgrade your systems for better performance",
+        icon: <Image width={500} height={300} className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
+        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" width={500} height={300} />
+    },
+    {
+        title: "Efficiency Upgrade",
+        description: "Upgrade your systems for better performance",
+        icon: <Image width={500} height={300} className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
+        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" width={500} height={300} />
+    },
+    {
+        title: "Efficiency Upgrade",
+        description: "Upgrade your systems for better performance",
+        icon: <Image width={500} height={300} className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
+        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" width={500} height={300} />
+    }
+]
+
+export default function Services(){
+    return(
+        <section className={`${style.servicesSec} container-fluid`}>
+            <div className={`${style["services-container"]} container mx-auto`}>
+                <div className={`${style.info}`}>
+                    <h6 className="font-semibold text-center">Our Services</h6>
+                    <h2 className="font-bold text-center">Quality Services</h2>
+                </div>
+
+                <div className="services flex flex-row flex-wrap justify-center">
+                    {serviceArray.map((service,index)=>{
+                        return (
+                            <div key={index} className={style.serviceBox}>
+                                <Image width={500} height={300} src={service.img.props.src} alt={service.img.props.alt} />
+                                <div className={style.serviceInfo}>
+                                    <div>
+                                        {service.icon}
+                                    </div>
+    
+                                    <div>
+                                        <h6>{service.title}</h6>
+                                        <p>{service.description}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
+        </section>
+    )
+}

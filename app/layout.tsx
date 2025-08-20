@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {Rajdhani } from "next/font/google";
-import "./globals.css";
+import "./styles/globals.css";
+import "./styles/responsive.css";
 import '@fortawesome/fontawesome-svg-core/styles.css'; // Import the CSS
 import { config } from '@fortawesome/fontawesome-svg-core';
 import LayoutClient from "./LayoutClient";
@@ -25,7 +26,7 @@ export default function RootLayout({
   const bodyClassName = `${MAINTENANCE_MODE ? "maintenance-mode" : ""}`;
  return (
     <html lang="en" className={`${rajdhani.variable} ${bodyClassName}`}>
-      <body className={`rajdhani-font antialiased ${bodyClassName}`}>
+      <body className={`rajdhani-font antialiased bgColor ${bodyClassName}`}>
         <LayoutClient>{children}</LayoutClient>
       </body>
     </html>

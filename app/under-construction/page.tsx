@@ -9,9 +9,11 @@ import Link from "next/link";
 
 const UnderConstruction:React.FC = () => {
     const router = useRouter();
-    if (!MAINTENANCE_MODE) {
-      router.push("/"); // 👈 Redirect to home
-    }
+    useEffect(() => {
+        if (!MAINTENANCE_MODE) {
+            router.push("/"); // 👈 Redirect to home
+        }
+    }, [router]);
 const [firstPart, ...rest] = SITE_NAME.split(" ");
 const secondPart = rest.join(" ");    
 

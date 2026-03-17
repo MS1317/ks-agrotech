@@ -1,48 +1,45 @@
-import React from "react";
+'use client';
+
+import React, { useState, useEffect } from "react";
 import style from "./services.module.css";
 import Image from "next/image";
+import { createClient } from "../../lib/supabase/client";
 
-const serviceArray=[
-    {
-        title: "Support Center",
-        description: "24/7 customer support",
-        icon: <Image width={500} height={300} className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Support Center" />,
-        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Support Center" width={500} height={300} />
-    },
-    {
-        title: "Rebuild",
-        description: "Rebuild your infrastructure",
-        icon: <Image width={500} height={300} className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Rebuild" />,
-        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Rebuild" width={500} height={300} />
-    },
-    {
-        title: "Efficiency Upgrade",
-        description: "Upgrade your systems for better performance",
-        icon: <Image width={500} height={300} className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
-        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" width={500} height={300} />
-    },
-    {
-        title: "Efficiency Upgrade",
-        description: "Upgrade your systems for better performance",
-        icon: <Image width={500} height={300} className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
-        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" width={500} height={300} />
-    },
-    {
-        title: "Efficiency Upgrade",
-        description: "Upgrade your systems for better performance",
-        icon: <Image width={500} height={300} className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
-        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" width={500} height={300} />
-    },
-    {
-        title: "Efficiency Upgrade",
-        description: "Upgrade your systems for better performance",
-        icon: <Image width={500} height={300} className={style.servImg} src={"/images/Home/services/industrial-robot.png"} alt="Efficiency Upgrade" />,
-        img: <Image src={"/images/Home/services/sv1.jpg"} alt="Efficiency Upgrade" width={500} height={300} />
+// Validate URL to prevent next/image from throwing an Invalid URL error
+const isValidUrl = (urlStr: string) => {
+    if (!urlStr) return false;
+    try {
+        new URL(urlStr, "http://localhost");
+        return true;
+    } catch {
+        return false;
     }
-]
+};
 
-export default function Services(){
-    return(
+interface ServiceData {
+    id: string;
+    title: string;
+    description: string;
+    icon_url: string;
+    image_url: string;
+    sort_order: number;
+}
+
+export default function Services() {
+    const [services, setServices] = useState<ServiceData[]>([]);
+    const supabase = createClient();
+
+    useEffect(() => {
+        const fetchServices = async () => {
+            const { data } = await supabase.from('services').select('*').order('sort_order', { ascending: true });
+            if (data) setServices(data);
+        };
+        fetchServices();
+    }, []);
+
+    if (services.length === 0) return null;
+
+    return (
         <section className={`${style.servicesSec} container-fluid`}>
             <div className={`${style["services-container"]} container mx-auto`}>
                 <div className={`${style.info}`}>
@@ -51,15 +48,19 @@ export default function Services(){
                 </div>
 
                 <div className="services flex flex-row flex-wrap justify-center">
-                    {serviceArray.map((service,index)=>{
+                    {services.map((service) => {
                         return (
-                            <div key={index} className={style.serviceBox}>
-                                <Image width={500} height={300} src={service.img.props.src} alt={service.img.props.alt} />
+                            <div key={service.id} className={style.serviceBox}>
+                                {service.image_url && isValidUrl(service.image_url) && (
+                                    <Image width={500} height={300} src={service.image_url} alt={service.title} />
+                                )}
                                 <div className={style.serviceInfo}>
                                     <div>
-                                        {service.icon}
+                                        {service.icon_url && isValidUrl(service.icon_url) && (
+                                            <Image width={500} height={300} className={style.servImg} src={service.icon_url} alt={`${service.title} icon`} />
+                                        )}
                                     </div>
-    
+
                                     <div>
                                         <h6>{service.title}</h6>
                                         <p>{service.description}</p>

@@ -14,11 +14,11 @@ const footerData = {
   categories: {
     title: "Our Categories",
     links: [
-      { text: "Blog", url: "/blog" },
-      { text: "Grinding Machines", url: "/grinding-machines" },
-      { text: "Milling Machine", url: "/milling-machine" },
-      { text: "Rotary Tables", url: "/rotary-tables" },
-      { text: "Vertical Lathes", url: "/vertical-lathes" }
+      { text: "Our Products", url: "/products" },
+      { text: "Our Services", url: "/services" },
+      { text: "About Us", url: "/about" },
+      { text: "Contact", url: "/contact" },
+      { text: "FAQs", url: "/faqs" }
     ]
   },
   workingHours: {
@@ -100,8 +100,8 @@ const Footer: React.FC = () => {
             <div className={style.photoGrid}>
               {footerData.photos.images.map((image, index) => (
                 <div key={index} className={style.photoItem}>
-                  <Image 
-                    src={image} 
+                  <Image
+                    src={image}
                     alt={`Gallery photo ${index + 1}`}
                     className={style.photo}
                     width={500}

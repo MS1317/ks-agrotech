@@ -6,7 +6,7 @@ import Services from '../components/Services/services';
 import CTA from '../components/CTA/cta';
 import Teams from '../components/Team/teams';
 import { FAQ } from '../components/FAQ/faq';
-import { Projects } from '../components/Projects/projects';
+import { Products } from '../components/Products/products';
 import { CTA2 } from '../components/CTA2/cta2';
 import Process from '../components/Process/process';
 import Testimonial from '../components/Testimonial/testimonial';
@@ -20,7 +20,7 @@ export default function Home() {
           <CTA />
           <Teams />
           <FAQ />
-          <Projects />
+          <Products />
           <CTA2 />
           <Process />
           <Testimonial />

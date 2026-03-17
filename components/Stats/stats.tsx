@@ -14,40 +14,40 @@ export default function Stats() {
                 <div className={`${style.statsCount} h-100`}>
                     <div className={style.box}>
                         <div className={style.icon}>
-                            <FontAwesomeIcon icon={faUser}/>
+                            <FontAwesomeIcon icon={faUser} />
                         </div>
                         <div>
-                            <h1 className="text-center font-bold">0</h1>
+                            <h1 className="text-center font-bold">25+</h1>
                             <p className="font-semibold">Awards</p>
                         </div>
                     </div>
 
                     <div className={style.box}>
                         <div className={style.icon}>
-                            <FontAwesomeIcon icon={faUser}/>
+                            <FontAwesomeIcon icon={faUser} />
                         </div>
                         <div>
-                            <h1 className="text-center font-bold">0</h1>
+                            <h1 className="text-center font-bold">15K+</h1>
                             <p className="font-semibold">Parts Produced</p>
                         </div>
                     </div>
 
                     <div className={style.box}>
                         <div className={style.icon}>
-                            <FontAwesomeIcon icon={faUser}/>
+                            <FontAwesomeIcon icon={faUser} />
                         </div>
                         <div>
-                            <h1 className="text-center font-bold">0</h1>
+                            <h1 className="text-center font-bold">500+</h1>
                             <p className="font-semibold">Ship Repair</p>
                         </div>
                     </div>
-                    
+
                     <div className={style.box}>
                         <div className={style.icon}>
-                            <FontAwesomeIcon icon={faUser}/>
+                            <FontAwesomeIcon icon={faUser} />
                         </div>
                         <div>
-                            <h1 className="text-center font-bold">0</h1>
+                            <h1 className="text-center font-bold">10K+</h1>
                             <p className="font-semibold">Dedicated Customers</p>
                         </div>
                     </div>

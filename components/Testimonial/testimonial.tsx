@@ -1,42 +1,62 @@
-import React, { useState } from "react";
+'use client';
+
+import React, { useState, useEffect } from "react";
 import styles from "./testimonials.module.css";
 import Image from "next/image";
+import { createClient } from "../../lib/supabase/client";
 
-const testimonialArray = [
-    {
-        text: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi ar",
-        author: "Adam Edward",
-        position: "CEO of UNL",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
-    },
-    {
-        text: "Outstanding quality and professional service. They exceeded our expectations in every aspect of the project. Highly recommended for anyone looking for reliable solutions.",
-        author: "Sarah Johnson",
-        position: "CTO of TechCorp",
-        image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face"
-    },
-    {
-        text: "Exceptional attention to detail and customer-focused approach. The team delivered exactly what we needed on time and within budget.",
-        author: "Michael Chen",
-        position: "Director of Operations",
-        image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+// Validate URL to prevent next/image from throwing an Invalid URL error
+const isValidUrl = (urlStr: string) => {
+    if (!urlStr) return false;
+    try {
+        new URL(urlStr, "http://localhost");
+        return true;
+    } catch {
+        return false;
     }
-];
+};
+
+interface TestimonialData {
+    id: string;
+    text: string;
+    author: string;
+    position: string;
+    image_url: string;
+    sort_order: number;
+}
 
 const Testimonial: React.FC = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [testimonialArray, setTestimonialArray] = useState<TestimonialData[]>([]);
+    const [loading, setLoading] = useState(true);
+    const supabase = createClient();
+
+    useEffect(() => {
+        const fetchTestimonials = async () => {
+            const { data } = await supabase.from('testimonials').select('*').order('sort_order', { ascending: true });
+            if (data) setTestimonialArray(data);
+            setLoading(false);
+        };
+        fetchTestimonials();
+    }, []);
 
     const nextTestimonial = () => {
+        if (testimonialArray.length === 0) return;
         setCurrentIndex((prevIndex) =>
             prevIndex === testimonialArray.length - 1 ? 0 : prevIndex + 1
         );
     };
 
     const prevTestimonial = () => {
+        if (testimonialArray.length === 0) return;
         setCurrentIndex((prevIndex) =>
             prevIndex === 0 ? testimonialArray.length - 1 : prevIndex - 1
         );
     };
+
+    if (loading || testimonialArray.length === 0) {
+        return null; // Don't render if loading or empty
+    }
 
     return (
         <section className={styles.testimonialSection}>
@@ -68,12 +88,14 @@ const Testimonial: React.FC = () => {
 
                                     <div className={styles.authorSection}>
                                         <div className={styles.authorImage}>
-                                            <Image
-                                                src={testimonial.image}
-                                                alt={testimonial.author}
-                                                width={150}
-                                                height={150}
-                                            />
+                                            {testimonial.image_url && isValidUrl(testimonial.image_url) && (
+                                                <Image
+                                                    src={testimonial.image_url}
+                                                    alt={testimonial.author || 'Testimonial Author'}
+                                                    width={150}
+                                                    height={150}
+                                                />
+                                            )}
                                         </div>
                                         <div className={styles.authorInfo}>
                                             <h4 className={styles.authorName}>{testimonial.author}</h4>
@@ -97,9 +119,8 @@ const Testimonial: React.FC = () => {
                     {testimonialArray.map((_, index) => (
                         <button
                             key={index}
-                            className={`${styles.dot} ${
-                                index === currentIndex ? styles.activeDot : ""
-                            }`}
+                            className={`${styles.dot} ${index === currentIndex ? styles.activeDot : ""
+                                }`}
                             onClick={() => setCurrentIndex(index)}
                         ></button>
                     ))}

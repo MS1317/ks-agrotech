@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import {Rajdhani } from "next/font/google";
+import { Rajdhani } from "next/font/google";
 import "./styles/globals.css";
 import "./styles/responsive.css";
 import '@fortawesome/fontawesome-svg-core/styles.css'; // Import the CSS
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 const rajdhani = Rajdhani({
-  subsets:["latin"],
+  subsets: ["latin"],
   variable: "--font-rajdhani",
   weight: ['400', '500', '600', '700'], // Include only the weights you need
 })
@@ -24,9 +24,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const bodyClassName = `${MAINTENANCE_MODE ? "maintenance-mode" : ""}`;
- return (
-    <html lang="en" className={`${rajdhani.variable} ${bodyClassName}`}>
-      <body className={`rajdhani-font antialiased bgColor ${bodyClassName}`}>
+  return (
+    <html lang="en" className={`${rajdhani.variable} ${bodyClassName}`} suppressHydrationWarning>
+      <body className={`rajdhani-font antialiased bgColor ${bodyClassName}`} suppressHydrationWarning>
         <LayoutClient>{children}</LayoutClient>
       </body>
     </html>

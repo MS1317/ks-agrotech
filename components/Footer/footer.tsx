@@ -1,25 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import style from "./footer.module.css";
 import Image from "next/image";
+import { createClient } from "../../lib/supabase/client";
 
 // Footer data configuration
 const footerData = {
   information: {
-    title: "Information",
-    description: "Also, all the demo images are collected from Unsplash. If you want to use those, you may need to provide necessary credits. Please visit Unsplash for details.",
-    links: [
-      { text: "Unsplash", url: "https://unsplash.com" }
-    ]
+    title: "About K.S. Agrotech",
+    description: "K.S. Agrotech is a leading manufacturer of agricultural pulleys in Sahnewal, Punjab. We specialize in V belt pulleys, thresher pulleys, reaper pulleys, combine pulleys, bush type pulley, cam pulley, and mudloader pulley.",
+    links: []
   },
-  categories: {
-    title: "Our Categories",
-    links: [
-      { text: "Our Products", url: "/products" },
-      { text: "Our Services", url: "/services" },
-      { text: "About Us", url: "/about" },
-      { text: "Contact", url: "/contact" },
-      { text: "FAQs", url: "/faqs" }
-    ]
+  contact: {
+    title: "Contact Us",
+    phone: "+91 9915360666",
+    email: "ksagrotech5@gmail.com",
+    address: "Sahnewal, Punjab, India"
   },
   workingHours: {
     title: "Working hours",
@@ -32,21 +27,26 @@ const footerData = {
       { day: "Sat-Sun", hours: "Off" }
     ]
   },
-  photos: {
-    title: "Photos",
-    images: [
-      "/images/Footer/g1.jpg",
-      "/images/Footer/g1.jpg",
-      "/images/Footer/g1.jpg",
-      "/images/Footer/g1.jpg",
-    ]
-  },
   copyright: {
-    text: "Created with ❤️ by TechiTuber"
+    text: "© 2024 K.S. Agrotech. All rights reserved."
   }
 };
 
 const Footer: React.FC = () => {
+  const [categories, setCategories] = useState<string[]>([]);
+  const supabase = createClient();
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const { data } = await supabase.from('products').select('category');
+      if (data) {
+        const uniqueCategories = Array.from(new Set(data.map(item => item.category).filter(Boolean)));
+        setCategories(uniqueCategories);
+      }
+    };
+    fetchCategories();
+  }, []);
+
   return (
     <footer className={style.footer}>
       <div className={style.container}>
@@ -55,26 +55,40 @@ const Footer: React.FC = () => {
           <div className={style.section}>
             <h3 className={style.sectionTitle}>{footerData.information.title}</h3>
             <p className={style.description}>
-              {footerData.information.description.split('Unsplash')[0]}
-              <a href={footerData.information.links[0].url} className={style.link}>
-                Unsplash
-              </a>
-              {footerData.information.description.split('Unsplash')[2]}
-              <a href={footerData.information.links[0].url} className={style.link}>
-                Unsplash
-              </a>
-              {footerData.information.description.split('Unsplash')[3]}
+              {footerData.information.description}
             </p>
           </div>
 
-          {/* Categories Section */}
+          {/* Contact Section */}
           <div className={style.section}>
-            <h3 className={style.sectionTitle}>{footerData.categories.title}</h3>
+            <h3 className={style.sectionTitle}>{footerData.contact.title}</h3>
             <ul className={style.linkList}>
-              {footerData.categories.links.map((link, index) => (
+              <li className={style.linkItem}>
+                <a href={`tel:${footerData.contact.phone}`} className={style.link}>
+                  📞 {footerData.contact.phone}
+                </a>
+              </li>
+              <li className={style.linkItem}>
+                <a href={`mailto:${footerData.contact.email}`} className={style.link}>
+                  ✉️ {footerData.contact.email}
+                </a>
+              </li>
+              <li className={style.linkItem}>
+                <span className={style.link}>
+                  📍 {footerData.contact.address}
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Categories Section - Dynamic from products */}
+          <div className={style.section}>
+            <h3 className={style.sectionTitle}>Our Products</h3>
+            <ul className={style.linkList}>
+              {categories.map((category, index) => (
                 <li key={index} className={style.linkItem}>
-                  <a href={link.url} className={style.link}>
-                    {link.text}
+                  <a href="/products" className={style.link}>
+                    {category}
                   </a>
                 </li>
               ))}
@@ -92,24 +106,6 @@ const Footer: React.FC = () => {
                 </li>
               ))}
             </ul>
-          </div>
-
-          {/* Photos Section */}
-          <div className={style.section}>
-            <h3 className={style.sectionTitle}>{footerData.photos.title}</h3>
-            <div className={style.photoGrid}>
-              {footerData.photos.images.map((image, index) => (
-                <div key={index} className={style.photoItem}>
-                  <Image
-                    src={image}
-                    alt={`Gallery photo ${index + 1}`}
-                    className={style.photo}
-                    width={500}
-                    height={300}
-                  />
-                </div>
-              ))}
-            </div>
           </div>
         </div>
 

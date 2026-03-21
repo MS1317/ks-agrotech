@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { createClient } from '../../../lib/supabase/client';
-import { Plus, Edit2, Trash2, X } from 'lucide-react';
+import { Plus, Edit2, Trash2, X, Upload, Copy } from 'lucide-react';
 import Image from 'next/image';
+import { CldImage, CldUploadWidget } from 'next-cloudinary';
 
 interface Testimonial {
   id: string;
@@ -96,6 +97,23 @@ export default function TestimonialsManagement() {
     }
   };
 
+  const handleDuplicate = async (testimonial: Testimonial) => {
+    try {
+      const { error } = await supabase.from('testimonials').insert([{
+        text: testimonial.text,
+        author: `${testimonial.author} (Copy)`,
+        position: testimonial.position,
+        image_url: testimonial.image_url,
+        sort_order: testimonials.length
+      }]);
+      if (error) throw error;
+      fetchTestimonials();
+    } catch (err) {
+      console.error("Error duplicating testimonial:", err);
+      alert("Failed to duplicate testimonial.");
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center border-b border-gray-200 pb-5">
@@ -122,12 +140,30 @@ export default function TestimonialsManagement() {
               <div key={testimonial.id} className="bg-white overflow-hidden shadow rounded-lg flex flex-col">
                 <div className="p-5 flex-1 flex flex-col items-center text-center">
                   <div className="h-20 w-20 relative rounded-full overflow-hidden mb-4 border-2 border-gray-100">
-                    <Image
-                      src={testimonial.image_url || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face'}
-                      alt={testimonial.author}
-                      fill
-                      className="object-cover"
-                    />
+                    {testimonial.image_url ? (
+                      testimonial.image_url.includes('cloudinary.com') ? (
+                        <CldImage
+                          src={testimonial.image_url}
+                          alt={testimonial.author}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <Image
+                          src={testimonial.image_url}
+                          alt={testimonial.author}
+                          fill
+                          className="object-cover"
+                        />
+                      )
+                    ) : (
+                      <Image
+                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+                        alt={testimonial.author}
+                        fill
+                        className="object-cover"
+                      />
+                    )}
                   </div>
                   <h3 className="text-lg font-medium text-gray-900">{testimonial.author}</h3>
                   <p className="text-sm text-blue-600 font-medium mb-4">{testimonial.position}</p>
@@ -140,6 +176,12 @@ export default function TestimonialsManagement() {
                     className="text-blue-600 hover:text-blue-900 text-sm font-medium flex items-center"
                   >
                     <Edit2 className="h-4 w-4 mr-1" /> Edit
+                  </button>
+                  <button
+                    onClick={() => handleDuplicate(testimonial)}
+                    className="text-green-600 hover:text-green-900 text-sm font-medium flex items-center"
+                  >
+                    <Copy className="h-4 w-4 mr-1" /> Duplicate
                   </button>
                   <button
                     onClick={() => handleDelete(testimonial.id)}
@@ -197,17 +239,48 @@ export default function TestimonialsManagement() {
                       />
                     </div>
                     <div>
-                      <label htmlFor="image_url" className="block text-sm font-medium text-gray-700">Image URL</label>
-                      <input
-                        type="text"
-                        name="image_url"
-                        id="image_url"
-                        required
-                        value={formData.image_url}
-                        onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                        className="mt-1 flex-1 block w-full border border-gray-300 rounded-md sm:text-sm px-3 py-2 text-black bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-500 h-10"
-                        placeholder="https://images.unsplash.com/..."
-                      />
+                      <label htmlFor="image_url" className="block text-sm font-medium text-gray-700 mb-1">Author Image</label>
+                      <div className="space-y-3">
+                        {formData.image_url && (
+                          <div className="relative h-20 w-20 rounded-full overflow-hidden border border-gray-200 shadow-sm bg-gray-50 flex items-center justify-center">
+                            {formData.image_url.includes('cloudinary.com') ? (
+                               <CldImage src={formData.image_url} alt="Preview" fill className="object-cover"/>
+                            ) : (
+                              <Image src={formData.image_url} alt="Preview" fill className="object-cover" unoptimized={!formData.image_url.startsWith('/')} />
+                            )}
+                            <button type="button" onClick={() => setFormData({ ...formData, image_url: '' })} className="absolute top-0 right-0 bg-red-500 text-white p-0.5 rounded-full hover:bg-red-600 transition shadow-sm">
+                              <X className="h-3 w-3" />
+                            </button>
+                          </div>
+                        )}
+                        <div className="flex gap-2">
+                          <CldUploadWidget 
+                            uploadPreset="ks-agrotech" 
+                            onSuccess={(result) => {
+                              if (typeof result.info !== 'string' && result.info?.secure_url) {
+                                setFormData({ ...formData, image_url: result.info.secure_url });
+                              }
+                            }}
+                          >
+                            {({ open }) => (
+                              <button type="button" onClick={() => open()} className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                <Upload className="h-4 w-4 mr-2" />
+                                {formData.image_url ? 'Change Image' : 'Upload Image'}
+                              </button>
+                            )}
+                          </CldUploadWidget>
+                          <input
+                            type="text"
+                            name="image_url"
+                            id="image_url"
+                            required
+                            value={formData.image_url}
+                            onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
+                            className="flex-1 block w-full border border-gray-300 rounded-md sm:text-sm px-3 py-2 text-black bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-500 h-10"
+                            placeholder="Image URL..."
+                          />
+                        </div>
+                      </div>
                     </div>
                     <div>
                       <label htmlFor="text" className="block text-sm font-medium text-gray-700">Testimonial Text</label>

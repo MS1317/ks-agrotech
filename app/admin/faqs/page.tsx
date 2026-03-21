@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { createClient } from '../../../lib/supabase/client';
-import { Plus, Edit2, Trash2, X } from 'lucide-react';
+import { Plus, Edit2, Trash2, X, Copy } from 'lucide-react';
 
 interface FAQ {
   id: string;
@@ -87,6 +87,21 @@ export default function FAQsManagement() {
     }
   };
 
+  const handleDuplicate = async (faq: FAQ) => {
+    try {
+      const { error } = await supabase.from('faqs').insert([{
+        question: `${faq.question} (Copy)`,
+        answer: faq.answer,
+        sort_order: faqs.length
+      }]);
+      if (error) throw error;
+      fetchFaqs();
+    } catch (err) {
+      console.error("Error duplicating FAQ:", err);
+      alert("Failed to duplicate FAQ.");
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center border-b border-gray-200 pb-5">
@@ -122,6 +137,13 @@ export default function FAQsManagement() {
                       title="Edit"
                     >
                       <Edit2 className="h-5 w-5" />
+                    </button>
+                    <button
+                      onClick={() => handleDuplicate(faq)}
+                      className="p-2 text-gray-400 hover:text-green-600 rounded-full hover:bg-green-50 transition-colors"
+                      title="Duplicate"
+                    >
+                      <Copy className="h-5 w-5" />
                     </button>
                     <button
                       onClick={() => handleDelete(faq.id)}

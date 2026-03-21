@@ -49,7 +49,7 @@ export default function Header() {
           </div>
 
         </div>
-        <nav aria-label="Global" className="mx-auto flex items-center justify-between p-6 lg:px-8 backdrop-blur-lg ">
+        <nav aria-label="Global" className="mx-auto flex items-center justify-between p-6 lg:px-8 backdrop-blur-lg transform-gpu will-change-[backdrop-filter]">
 
           <div className="flex lg:hidden order-1">
             <button
@@ -89,15 +89,6 @@ export default function Header() {
             </a>
             <a href="/about" className=" text-base font-bold text-gray-950">
               About
-            </a>
-            <a href="/services" className=" text-base font-bold text-gray-950">
-              Services
-            </a>
-            <a href="/products" className=" text-base font-bold text-gray-950">
-              Products
-            </a>
-            <a href="/faqs" className=" text-base font-bold text-gray-950">
-              FAQs
             </a>
             <a href="/contact" className=" text-base font-bold text-gray-950">
               Contact
@@ -142,24 +133,6 @@ export default function Header() {
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-bold text-gray-900 hover:bg-gray-50"
                   >
                     About
-                  </a>
-                  <a
-                    href="/services"
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-bold text-gray-900 hover:bg-gray-50"
-                  >
-                    Services
-                  </a>
-                  <a
-                    href="/products"
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-bold text-gray-900 hover:bg-gray-50"
-                  >
-                    Products
-                  </a>
-                  <a
-                    href="/faqs"
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-bold text-gray-900 hover:bg-gray-50"
-                  >
-                    FAQs
                   </a>
                   <a
                     href="/contact"

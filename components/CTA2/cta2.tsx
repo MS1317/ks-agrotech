@@ -13,14 +13,14 @@ export const CTA2 = () => {
             
             <div className={style.content}>
                 <div className={style.textContent}>
-                    <h2>We Offer Professional Consultation For Free</h2>
-                    <p>Everything should be as simple as it is, but not simpler as you</p>
+                    <h2>Get Expert Consultation for Your Pulley Needs</h2>
+                    <p>Contact us today for personalized solutions tailored to your requirements</p>
                 </div>
                 <div className={style.ctaButton}>
-                    <button className={style.contactBtn}>
+                    <a href="#contact-form" className={style.contactBtn}>
                         Contact Us
                         <span className={style.star}>★</span>
-                    </button>
+                    </a>
                 </div>
             </div>
         </section>

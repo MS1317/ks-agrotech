@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import style from "./products.module.css";
 import Image from "next/image";
 import { createClient } from "../../lib/supabase/client";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Validate URL to prevent next/image from throwing an Invalid URL error
 const isValidUrl = (urlStr: string) => {
@@ -65,12 +66,24 @@ export const Products = () => {
     if (loading || productsData.length === 0) return null;
 
     return (
-        <section className={style.productsSection}>
+        <motion.section 
+            className={style.productsSection}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.8 }}
+        >
             <div className={style.container}>
-                <div className={style.header}>
+                <motion.div 
+                    className={style.header}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.6 }}
+                >
                     <span className={style.ourWorks}>Our Products</span>
                     <h2>Latest Products</h2>
-                </div>
+                </motion.div>
 
                 <div className={style.filterButtons}>
                     {categories.map((filter) => (
@@ -85,27 +98,35 @@ export const Products = () => {
                 </div>
 
                 <div className={`${style.productsGrid} ${isAnimating ? style.animating : ''}`}>
-                    {filteredProducts.map((product, index) => (
-                        <div
-                            key={product.id}
-                            className={style.projectCard}
-                            style={{
-                                animationDelay: `${index * 0.1}s`
-                            }}
-                        >
-                            <div className={style.imageContainer}>
-                                {product.image_url && isValidUrl(product.image_url) && (
-                                    <Image src={product.image_url} alt={product.title} width={500} height={300} />
-                                )}
-                                <div className={style.overlay}>
-                                    <h3>{product.title}</h3>
-                                    <p style={{ color: 'white', fontSize: '14px', marginTop: '5px' }}>{product.description}</p>
+                    <AnimatePresence mode="popLayout">
+                        {filteredProducts.map((product, index) => (
+                            <motion.div
+                                layout
+                                key={product.id}
+                                className={style.projectCard}
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true, amount: 0.1 }}
+                                exit={{ opacity: 0, scale: 0.9 }}
+                                transition={{ duration: 0.3 }}
+                                style={{
+                                    animationDelay: `${index * 0.1}s`
+                                }}
+                            >
+                                <div className={style.imageContainer}>
+                                    {product.image_url && isValidUrl(product.image_url) && (
+                                        <Image src={product.image_url} alt={product.title} width={500} height={300} />
+                                    )}
+                                    <div className={style.overlay}>
+                                        <h3>{product.title}</h3>
+                                        <p style={{ color: 'white', fontSize: '14px', marginTop: '5px' }}>{product.description}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    ))}
+                            </motion.div>
+                        ))}
+                    </AnimatePresence>
                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 };

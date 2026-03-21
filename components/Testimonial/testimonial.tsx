@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styles from "./testimonials.module.css";
 import Image from "next/image";
 import { createClient } from "../../lib/supabase/client";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
-// Validate URL to prevent next/image from throwing an Invalid URL error
 const isValidUrl = (urlStr: string) => {
     if (!urlStr) return false;
     try {
@@ -26,12 +27,13 @@ interface TestimonialData {
 }
 
 const Testimonial: React.FC = () => {
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [testimonialArray, setTestimonialArray] = useState<TestimonialData[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [testimonialArray, setTestimonialArray] = React.useState<TestimonialData[]>([]);
+    const [loading, setLoading] = React.useState(true);
+    const [currentIndex, setCurrentIndex] = React.useState(0);
+    const [direction, setDirection] = React.useState(0);
     const supabase = createClient();
 
-    useEffect(() => {
+    React.useEffect(() => {
         const fetchTestimonials = async () => {
             const { data } = await supabase.from('testimonials').select('*').order('sort_order', { ascending: true });
             if (data) setTestimonialArray(data);
@@ -40,90 +42,128 @@ const Testimonial: React.FC = () => {
         fetchTestimonials();
     }, []);
 
-    const nextTestimonial = () => {
-        if (testimonialArray.length === 0) return;
-        setCurrentIndex((prevIndex) =>
-            prevIndex === testimonialArray.length - 1 ? 0 : prevIndex + 1
-        );
+    const slideVariants = {
+        enter: (direction: number) => ({
+            x: direction > 0 ? 500 : -500,
+            opacity: 0,
+            scale: 0.95
+        }),
+        center: {
+            zIndex: 1,
+            x: 0,
+            opacity: 1,
+            scale: 1
+        },
+        exit: (direction: number) => ({
+            zIndex: 0,
+            x: direction < 0 ? 500 : -500,
+            opacity: 0,
+            scale: 0.95
+        })
     };
 
-    const prevTestimonial = () => {
-        if (testimonialArray.length === 0) return;
-        setCurrentIndex((prevIndex) =>
-            prevIndex === 0 ? testimonialArray.length - 1 : prevIndex - 1
-        );
+    const swipeConfidenceThreshold = 10000;
+    const swipePower = (offset: number, velocity: number) => {
+        return Math.abs(offset) * velocity;
+    };
+
+    const paginate = (newDirection: number) => {
+        setDirection(newDirection);
+        setCurrentIndex((prevIndex) => (prevIndex + newDirection + testimonialArray.length) % testimonialArray.length);
     };
 
     if (loading || testimonialArray.length === 0) {
-        return null; // Don't render if loading or empty
+        return null;
     }
 
     return (
         <section className={styles.testimonialSection}>
-            <div className={styles.overlay}></div>
             <div className={styles.testimonialContainer}>
-                {/* Header */}
                 <div className={styles.header}>
-                    <span className={styles.subtitle}>Client Love</span>
+                    <span className={styles.subtitle}>Client Feedback</span>
                     <div className={styles.underline}></div>
-                    <h2 className={styles.title}>Testimonials</h2>
+                    <h2 className={styles.title}>What Our Clients Say</h2>
                 </div>
 
-                {/* Testimonial Slider */}
-                <div className={styles.testimonialContent}>
-                    <button className={`${styles.navButton} ${styles.prevButton}`} onClick={prevTestimonial}>
-                        <span className={styles.arrow}>‹</span>
-                    </button>
+                <div className={styles.sliderWrapper}>
+                    <div className={styles.sliderContainer}>
+                        <AnimatePresence initial={false} custom={direction} mode="wait">
+                            <motion.div
+                                key={currentIndex}
+                                custom={direction}
+                                variants={slideVariants}
+                                initial="enter"
+                                animate="center"
+                                exit="exit"
+                                transition={{
+                                    x: { type: "spring", stiffness: 300, damping: 30 },
+                                    opacity: { duration: 0.4 },
+                                    scale: { duration: 0.4 }
+                                }}
+                                drag="x"
+                                dragConstraints={{ left: 0, right: 0 }}
+                                dragElastic={1}
+                                onDragEnd={(e, { offset, velocity }) => {
+                                    const swipe = swipePower(offset.x, velocity.x);
 
-                    <div className={styles.testimonialSlider}>
-                        <div
-                            className={styles.sliderTrack}
-                            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-                        >
-                            {testimonialArray.map((testimonial, index) => (
-                                <div key={index} className={styles.testimonialCard}>
-                                    <div className={styles.testimonialText}>
-                                        <p>{testimonial.text}</p>
+                                    if (swipe < -swipeConfidenceThreshold) {
+                                        paginate(1);
+                                    } else if (swipe > swipeConfidenceThreshold) {
+                                        paginate(-1);
+                                    }
+                                }}
+                                className={styles.testimonialCard}
+                            >
+                                <div className={styles.quoteIcon}>"</div>
+                                <div className={styles.testimonialText}>
+                                    <p>{testimonialArray[currentIndex].text}</p>
+                                </div>
+
+                                <div className={styles.authorSection}>
+                                    <div className={styles.authorImage}>
+                                        {testimonialArray[currentIndex].image_url && isValidUrl(testimonialArray[currentIndex].image_url) ? (
+                                            <Image
+                                                src={testimonialArray[currentIndex].image_url}
+                                                alt={testimonialArray[currentIndex].author || 'Testimonial Author'}
+                                                width={60}
+                                                height={60}
+                                            />
+                                        ) : (
+                                            <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '24px' }}>
+                                                {testimonialArray[currentIndex].author?.charAt(0) || 'C'}
+                                            </div>
+                                        )}
                                     </div>
-
-                                    <div className={styles.authorSection}>
-                                        <div className={styles.authorImage}>
-                                            {testimonial.image_url && isValidUrl(testimonial.image_url) && (
-                                                <Image
-                                                    src={testimonial.image_url}
-                                                    alt={testimonial.author || 'Testimonial Author'}
-                                                    width={150}
-                                                    height={150}
-                                                />
-                                            )}
-                                        </div>
-                                        <div className={styles.authorInfo}>
-                                            <h4 className={styles.authorName}>{testimonial.author}</h4>
-                                            <p className={styles.authorPosition}>
-                                                {testimonial.position}
-                                            </p>
-                                        </div>
+                                    <div className={styles.authorInfo}>
+                                        <h4 className={styles.authorName}>{testimonialArray[currentIndex].author}</h4>
+                                        <p className={styles.authorPosition}>
+                                            {testimonialArray[currentIndex].position}
+                                        </p>
                                     </div>
                                 </div>
-                            ))}
-                        </div>
+                            </motion.div>
+                        </AnimatePresence>
                     </div>
 
-                    <button className={`${styles.navButton} ${styles.nextButton}`} onClick={nextTestimonial}>
-                        <span className={styles.arrow}>›</span>
+                    <button className={`${styles.navButton} ${styles.prev}`} onClick={() => paginate(-1)}>
+                        <ChevronLeftIcon className="h-6 w-6" />
                     </button>
-                </div>
+                    <button className={`${styles.navButton} ${styles.next}`} onClick={() => paginate(1)}>
+                        <ChevronRightIcon className="h-6 w-6" />
+                    </button>
 
-                {/* Dots indicator */}
-                <div className={styles.dotsContainer}>
-                    {testimonialArray.map((_, index) => (
-                        <button
-                            key={index}
-                            className={`${styles.dot} ${index === currentIndex ? styles.activeDot : ""
-                                }`}
-                            onClick={() => setCurrentIndex(index)}
-                        ></button>
-                    ))}
+                    <div className={styles.dots}>
+                        {testimonialArray.map((_, index) => (
+                            <button
+                                key={index}
+                                className={`${styles.dot} ${index === currentIndex ? styles.activeDot : ''}`}
+                                onClick={() => {
+                                    setDirection(index > currentIndex ? 1 : -1);
+                                    setCurrentIndex(index);
+                                }}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>

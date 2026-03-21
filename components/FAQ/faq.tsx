@@ -67,7 +67,7 @@ export const FAQ = () => {
     return (
         <section className={style.faqSection}>
             <div className={style.container}>
-                <div className={style.contactForm}>
+                <div id="contact-form" className={style.contactForm}>
                     <h2>Name</h2>
                     <form onSubmit={handleFormSubmit}>
                         <div className={style.nameRow}>

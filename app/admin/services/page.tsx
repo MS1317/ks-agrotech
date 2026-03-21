@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { createClient } from '../../../lib/supabase/client';
-import { Plus, Edit2, Trash2, X } from 'lucide-react';
+import { Plus, Edit2, Trash2, X, Upload, Copy } from 'lucide-react';
 import Image from 'next/image';
+import { CldImage, CldUploadWidget } from 'next-cloudinary';
 
 interface Service {
   id: string;
@@ -96,6 +97,23 @@ export default function ServicesManagement() {
     }
   };
 
+  const handleDuplicate = async (service: Service) => {
+    try {
+      const { error } = await supabase.from('services').insert([{
+        title: `${service.title} (Copy)`,
+        description: service.description,
+        icon_url: service.icon_url,
+        image_url: service.image_url,
+        sort_order: services.length
+      }]);
+      if (error) throw error;
+      fetchServices();
+    } catch (err) {
+      console.error("Error duplicating service:", err);
+      alert("Failed to duplicate service.");
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center border-b border-gray-200 pb-5">
@@ -122,14 +140,22 @@ export default function ServicesManagement() {
               <div key={service.id} className="bg-white overflow-hidden shadow rounded-lg flex flex-col">
                 <div className="h-48 w-full relative bg-gray-200">
                   {service.image_url ? (
-                    <Image src={service.image_url} alt={service.title} fill className="object-cover" />
+                    service.image_url.includes('cloudinary.com') ? (
+                      <CldImage src={service.image_url} alt={service.title} fill className="object-cover" />
+                    ) : (
+                      <Image src={service.image_url} alt={service.title} fill className="object-cover" />
+                    )
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center text-gray-400">No Image</div>
                   )}
                   <div className="absolute -bottom-6 right-6 h-12 w-12 bg-white rounded-full p-2 shadow-lg z-10">
                     <div className="relative w-full h-full">
                       {service.icon_url ? (
-                        <Image src={service.icon_url} alt={`${service.title} Icon`} fill className="object-contain" />
+                        service.icon_url.includes('cloudinary.com') ? (
+                          <CldImage src={service.icon_url} alt={`${service.title} Icon`} fill className="object-contain" />
+                        ) : (
+                          <Image src={service.icon_url} alt={`${service.title} Icon`} fill className="object-contain" />
+                        )
                       ) : (
                         <div className="w-full h-full bg-blue-100 rounded-full" />
                       )}
@@ -147,6 +173,12 @@ export default function ServicesManagement() {
                     className="text-blue-600 hover:text-blue-900 text-sm font-medium flex items-center"
                   >
                     <Edit2 className="h-4 w-4 mr-1" /> Edit
+                  </button>
+                  <button
+                    onClick={() => handleDuplicate(service)}
+                    className="text-green-600 hover:text-green-900 text-sm font-medium flex items-center"
+                  >
+                    <Copy className="h-4 w-4 mr-1" /> Duplicate
                   </button>
                   <button
                     onClick={() => handleDelete(service.id)}
@@ -192,29 +224,91 @@ export default function ServicesManagement() {
                       />
                     </div>
                     <div>
-                      <label htmlFor="image_url" className="block text-sm font-medium text-gray-700">Main Image URL</label>
-                      <input
-                        type="text"
-                        name="image_url"
-                        id="image_url"
-                        required
-                        value={formData.image_url}
-                        onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                        className="mt-1 flex-1 block w-full border border-gray-300 rounded-md sm:text-sm px-3 py-2 text-black bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-500 h-10"
-                        placeholder="/images/Home/services/sv1.jpg"
-                      />
+                      <label htmlFor="image_url" className="block text-sm font-medium text-gray-700 mb-1">Main Image</label>
+                      <div className="space-y-3">
+                        {formData.image_url && (
+                          <div className="relative h-32 w-full rounded-lg overflow-hidden border border-gray-200 shadow-sm bg-gray-50 flex items-center justify-center">
+                            {formData.image_url.includes('cloudinary.com') ? (
+                               <CldImage src={formData.image_url} alt="Preview" fill className="object-cover"/>
+                            ) : (
+                              <Image src={formData.image_url} alt="Preview" fill className="object-cover" unoptimized={!formData.image_url.startsWith('/')} />
+                            )}
+                            <button type="button" onClick={() => setFormData({ ...formData, image_url: '' })} className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full hover:bg-red-600 transition shadow-sm">
+                              <X className="h-3 w-3" />
+                            </button>
+                          </div>
+                        )}
+                        <div className="flex gap-2">
+                          <CldUploadWidget 
+                            uploadPreset="ks-agrotech" 
+                            onSuccess={(result) => {
+                              if (typeof result.info !== 'string' && result.info?.secure_url) {
+                                setFormData({ ...formData, image_url: result.info.secure_url });
+                              }
+                            }}
+                          >
+                            {({ open }) => (
+                              <button type="button" onClick={() => open()} className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                <Upload className="h-4 w-4 mr-2" />
+                                {formData.image_url ? 'Change Image' : 'Upload Image'}
+                              </button>
+                            )}
+                          </CldUploadWidget>
+                          <input
+                            type="text"
+                            name="image_url"
+                            id="image_url"
+                            required
+                            value={formData.image_url}
+                            onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
+                            className="flex-1 block w-full border border-gray-300 rounded-md sm:text-sm px-3 py-2 text-black bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-500 h-10"
+                            placeholder="Image URL..."
+                          />
+                        </div>
+                      </div>
                     </div>
                     <div>
-                      <label htmlFor="icon_url" className="block text-sm font-medium text-gray-700">Icon URL (Optional)</label>
-                      <input
-                        type="text"
-                        name="icon_url"
-                        id="icon_url"
-                        value={formData.icon_url}
-                        onChange={(e) => setFormData({ ...formData, icon_url: e.target.value })}
-                        className="mt-1 flex-1 block w-full border border-gray-300 rounded-md sm:text-sm px-3 py-2 text-black bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-500 h-10"
-                        placeholder="/images/Home/services/industrial-robot.png"
-                      />
+                      <label htmlFor="icon_url" className="block text-sm font-medium text-gray-700 mb-1">Icon (Optional)</label>
+                      <div className="space-y-3">
+                        {formData.icon_url && (
+                          <div className="relative h-16 w-16 rounded-full overflow-hidden border border-gray-200 shadow-sm bg-gray-50 flex items-center justify-center">
+                            {formData.icon_url.includes('cloudinary.com') ? (
+                               <CldImage src={formData.icon_url} alt="Icon Preview" fill className="object-contain p-2"/>
+                            ) : (
+                              <Image src={formData.icon_url} alt="Icon Preview" fill className="object-contain p-2" unoptimized={!formData.icon_url.startsWith('/')} />
+                            )}
+                            <button type="button" onClick={() => setFormData({ ...formData, icon_url: '' })} className="absolute top-0 right-0 bg-red-500 text-white p-0.5 rounded-full hover:bg-red-600 transition shadow-sm">
+                              <X className="h-2.5 w-2.5" />
+                            </button>
+                          </div>
+                        )}
+                        <div className="flex gap-2">
+                          <CldUploadWidget 
+                            uploadPreset="ks-agrotech" 
+                            onSuccess={(result) => {
+                              if (typeof result.info !== 'string' && result.info?.secure_url) {
+                                setFormData({ ...formData, icon_url: result.info.secure_url });
+                              }
+                            }}
+                          >
+                            {({ open }) => (
+                              <button type="button" onClick={() => open()} className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                <Upload className="h-4 w-4 mr-2" />
+                                {formData.icon_url ? 'Change Icon' : 'Upload Icon'}
+                              </button>
+                            )}
+                          </CldUploadWidget>
+                          <input
+                            type="text"
+                            name="icon_url"
+                            id="icon_url"
+                            value={formData.icon_url}
+                            onChange={(e) => setFormData({ ...formData, icon_url: e.target.value })}
+                            className="flex-1 block w-full border border-gray-300 rounded-md sm:text-sm px-3 py-2 text-black bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-500 h-10"
+                            placeholder="Icon URL..."
+                          />
+                        </div>
+                      </div>
                     </div>
                     <div>
                       <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import style from "./services.module.css";
 import Image from "next/image";
 import { createClient } from "../../lib/supabase/client";
+import { motion } from "framer-motion";
 
 // Validate URL to prevent next/image from throwing an Invalid URL error
 const isValidUrl = (urlStr: string) => {
@@ -40,17 +41,46 @@ export default function Services() {
     if (services.length === 0) return null;
 
     return (
-        <section className={`${style.servicesSec} container-fluid`}>
+        <motion.section 
+            className={`${style.servicesSec} container-fluid`}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.8 }}
+        >
             <div className={`${style["services-container"]} container mx-auto`}>
-                <div className={`${style.info}`}>
+                <motion.div 
+                    className={`${style.info}`}
+                    initial={{ opacity: 0, y: -20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.6 }}
+                >
                     <h6 className="font-semibold text-center">Our Services</h6>
                     <h2 className="font-bold text-center">Quality Services</h2>
-                </div>
+                </motion.div>
 
-                <div className="services flex flex-row flex-wrap justify-center">
+                <motion.div 
+                    className="services flex flex-row flex-wrap justify-center"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.1 }}
+                    variants={{
+                        hidden: {},
+                        visible: { transition: { staggerChildren: 0.1 } }
+                    }}
+                >
                     {services.map((service) => {
                         return (
-                            <div key={service.id} className={style.serviceBox}>
+                            <motion.div 
+                                key={service.id} 
+                                className={style.serviceBox}
+                                variants={{
+                                    hidden: { opacity: 0, y: 20 },
+                                    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                                }}
+                                whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+                            >
                                 {service.image_url && isValidUrl(service.image_url) && (
                                     <Image width={500} height={300} src={service.image_url} alt={service.title} />
                                 )}
@@ -66,11 +96,11 @@ export default function Services() {
                                         <p>{service.description}</p>
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
                         )
                     })}
-                </div>
+                </motion.div>
             </div>
-        </section>
+        </motion.section>
     )
 }

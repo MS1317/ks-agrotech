@@ -25,7 +25,7 @@ export default function TestimonialsManagement() {
 
   useEffect(() => {
     fetchTestimonials();
-  }, []);
+  }, [supabase]);
 
   const fetchTestimonials = async () => {
     try {
@@ -133,7 +133,7 @@ export default function TestimonialsManagement() {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {testimonials.length === 0 ? (
             <div className="col-span-full py-10 text-center rounded-lg border-2 border-dashed border-gray-300">
-              <span className="text-gray-500">No testimonials found. Click "Add Testimonial" to create one.</span>
+              <span className="text-gray-500">No testimonials found. Click &quot;Add Testimonial&quot; to create one.</span>
             </div>
           ) : (
             testimonials.map((testimonial) => (
@@ -167,7 +167,7 @@ export default function TestimonialsManagement() {
                   </div>
                   <h3 className="text-lg font-medium text-gray-900">{testimonial.author}</h3>
                   <p className="text-sm text-blue-600 font-medium mb-4">{testimonial.position}</p>
-                  <p className="text-sm text-gray-500 italic flex-1">"{testimonial.text}"</p>
+                  <p className="text-sm text-gray-500 italic flex-1">&quot;{testimonial.text}&quot;</p>
                   <p className="mt-4 text-xs text-gray-400">Sort Order: {testimonial.sort_order}</p>
                 </div>
                 <div className="bg-gray-50 px-5 py-3 border-t border-gray-200 flex justify-between">

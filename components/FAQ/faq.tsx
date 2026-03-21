@@ -35,7 +35,7 @@ export const FAQ = () => {
             }
         };
         fetchFAQs();
-    }, []);
+    }, [supabase]);
 
     const toggleFAQ = (index: number) => {
         setOpenFAQ(openFAQ === index ? null : index);

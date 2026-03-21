@@ -84,15 +84,15 @@ export default function Header() {
             </div>
           </div>
           <PopoverGroup className="hidden lg:flex lg:gap-x-12">
-            <a href="/" className=" text-base font-bold text-gray-950">
+            <Link href="/" className=" text-base font-bold text-gray-950">
               Home
-            </a>
-            <a href="/about" className=" text-base font-bold text-gray-950">
+            </Link>
+            <Link href="/about" className=" text-base font-bold text-gray-950">
               About
-            </a>
-            <a href="/contact" className=" text-base font-bold text-gray-950">
+            </Link>
+            <Link href="/contact" className=" text-base font-bold text-gray-950">
               Contact
-            </a>
+            </Link>
           </PopoverGroup>
         </nav>
         <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
@@ -122,24 +122,24 @@ export default function Header() {
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="space-y-2 py-6">
-                  <a
+                  <Link
                     href="/"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-bold text-gray-900 hover:bg-gray-50"
                   >
                     Home
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/about"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-bold text-gray-900 hover:bg-gray-50"
                   >
                     About
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/contact"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-bold text-gray-900 hover:bg-gray-50"
                   >
                     Contact
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

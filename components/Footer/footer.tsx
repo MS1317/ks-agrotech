@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import style from "./footer.module.css";
-import Image from "next/image";
 import { createClient } from "../../lib/supabase/client";
 
 // Footer data configuration
@@ -45,7 +44,7 @@ const Footer: React.FC = () => {
       }
     };
     fetchCategories();
-  }, []);
+  }, [supabase]);
 
   return (
     <footer className={style.footer}>

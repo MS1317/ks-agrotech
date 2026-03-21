@@ -114,7 +114,7 @@ const Testimonial: React.FC = () => {
                                 }}
                                 className={styles.testimonialCard}
                             >
-                                <div className={styles.quoteIcon}>"</div>
+                                <div className={styles.quoteIcon}>&quot;</div>
                                 <div className={styles.testimonialText}>
                                     <p>{testimonialArray[currentIndex].text}</p>
                                 </div>

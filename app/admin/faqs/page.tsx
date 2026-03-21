@@ -21,7 +21,7 @@ export default function FAQsManagement() {
 
   useEffect(() => {
     fetchFaqs();
-  }, []);
+  }, [supabase]);
 
   const fetchFaqs = async () => {
     try {
@@ -121,7 +121,7 @@ export default function FAQsManagement() {
         <div className="bg-white shadow overflow-hidden sm:rounded-md">
           <ul className="divide-y divide-gray-200">
             {faqs.length === 0 ? (
-              <li className="px-6 py-10 text-center text-gray-500">No FAQs found. Click "Add FAQ" to create one.</li>
+              <li className="px-6 py-10 text-center text-gray-500">No FAQs found. Click &quot;Add FAQ&quot; to create one.</li>
             ) : (
               faqs.map((faq) => (
                 <li key={faq.id} className="px-6 py-4 flex items-center justify-between hover:bg-gray-50">

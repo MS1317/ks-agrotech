@@ -25,7 +25,7 @@ export default function ProductsManagement() {
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [supabase]);
 
   const fetchProducts = async () => {
     try {
@@ -133,7 +133,7 @@ export default function ProductsManagement() {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {products.length === 0 ? (
             <div className="col-span-full py-10 text-center rounded-lg border-2 border-dashed border-gray-300">
-              <span className="text-gray-500">No products found. Click "Add Product" to create one.</span>
+              <span className="text-gray-500">No products found. Click &quot;Add Product&quot; to create one.</span>
             </div>
           ) : (
             products.map((product) => (

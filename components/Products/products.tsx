@@ -47,7 +47,7 @@ export const Products = () => {
             setLoading(false);
         };
         fetchProducts();
-    }, []);
+    }, [supabase]);
 
     const filteredProducts = activeFilter === "Show All"
         ? productsData

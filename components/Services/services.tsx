@@ -36,7 +36,7 @@ export default function Services() {
             if (data) setServices(data);
         };
         fetchServices();
-    }, []);
+    }, [supabase]);
 
     if (services.length === 0) return null;
 

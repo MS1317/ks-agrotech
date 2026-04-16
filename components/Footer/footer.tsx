@@ -11,23 +11,23 @@ const footerData = {
   },
   contact: {
     title: "Contact Us",
-    phone: "+91 9915360666",
+    phone: "+91 9815248682, +91 9915360666, 0161-2990966",
     email: "ksagrotech5@gmail.com",
-    address: "Sahnewal, Punjab, India"
+    address: "Gurdev Industrial Estate near Leeford Healthcare, Sahnewal, Punjab 141206"
   },
   workingHours: {
     title: "Working hours",
     schedule: [
-      { day: "Monday", hours: "8am - 7pm" },
-      { day: "Tuesday", hours: "8am - 7pm" },
-      { day: "Wednesday", hours: "8am - 7pm" },
-      { day: "Thursday", hours: "8am - 7pm" },
-      { day: "Friday", hours: "8am - 7pm" },
-      { day: "Sat-Sun", hours: "Off" }
+      { day: "Monday", hours: "9am - 6pm" },
+      { day: "Tuesday", hours: "9am - 6pm" },
+      { day: "Wednesday", hours: "9am - 6pm" },
+      { day: "Thursday", hours: "9am - 6pm" },
+      { day: "Friday", hours: "9am - 6pm" },
+      { day: "Sat-Sun", hours: "9am - 6pm" }
     ]
   },
   copyright: {
-    text: "© 2024 K.S. Agrotech. All rights reserved."
+    text: "© 2026 K.S. Agrotech. All rights reserved."
   }
 };
 

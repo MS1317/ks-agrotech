@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
 
   return (
     <footer className={style.footer}>
-      <div className={style.container}>
+      <div className={`${style.container} w-full max-w-7xl mx-auto px-4 lg:px-8`}>
         <div className={style.footerContent}>
           {/* Information Section */}
           <div className={style.section}>
@@ -63,8 +63,18 @@ const Footer: React.FC = () => {
             <h3 className={style.sectionTitle}>{footerData.contact.title}</h3>
             <ul className={style.linkList}>
               <li className={style.linkItem}>
-                <a href={`tel:${footerData.contact.phone}`} className={style.link}>
-                  📞 {footerData.contact.phone}
+                <a href={`tel:+919815248682`} className={style.link}>
+                  📞 +91 9815248682
+                </a>
+              </li>
+              <li className={style.linkItem}>
+                <a href={`tel:+919915360666`} className={style.link}>
+                  📞 +91 9915360666
+                </a>
+              </li>
+              <li className={style.linkItem}>
+                <a href={`tel:01612990966`} className={style.link}>
+                  📞 0161-2990966
                 </a>
               </li>
               <li className={style.linkItem}>
@@ -75,6 +85,11 @@ const Footer: React.FC = () => {
               <li className={style.linkItem}>
                 <span className={style.link}>
                   📍 {footerData.contact.address}
+                </span>
+              </li>
+              <li className={style.linkItem}>
+                <span className={style.link}>
+                  📄 GSTIN: 03XXXXX0000X0XX (Applied)
                 </span>
               </li>
             </ul>

@@ -11,7 +11,7 @@ export const CTA2 = () => {
             ></div>
             <div className={style.overlay}></div>
             
-            <div className={style.content}>
+            <div className={`${style.content} w-full max-w-7xl mx-auto px-4 lg:px-8`}>
                 <div className={style.textContent}>
                     <h2>Get Expert Consultation for Your Pulley Needs</h2>
                     <p>Contact us today for personalized solutions tailored to your requirements</p>

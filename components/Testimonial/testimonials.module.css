@@ -1,12 +1,11 @@
 .testimonialSection {
     overflow: hidden;
-    padding: 80px 20px;
+    padding-top: 80px;
+    padding-bottom: 80px;
     background: #f8f9fa;
 }
 
 .testimonialContainer {
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .header {

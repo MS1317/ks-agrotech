@@ -20,6 +20,7 @@ export const FAQ = () => {
         first_name: '',
         last_name: '',
         email: '',
+        phone: '',
         message: ''
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -35,28 +36,10 @@ export const FAQ = () => {
             }
         };
         fetchFAQs();
-    }, [supabase]);
+    }, []);
 
     const toggleFAQ = (index: number) => {
         setOpenFAQ(openFAQ === index ? null : index);
-    };
-
-    const handleFormSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        setSubmitStatus('idle');
-
-        const { error } = await supabase.from('contact_queries').insert([formData]);
-
-        if (error) {
-            console.error("Error submitting form", error);
-            setSubmitStatus('error');
-        } else {
-            setSubmitStatus('success');
-            setFormData({ first_name: '', last_name: '', email: '', message: '' }); // reset
-            setTimeout(() => setSubmitStatus('idle'), 5000);
-        }
-        setIsSubmitting(false);
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -64,75 +47,142 @@ export const FAQ = () => {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setSubmitStatus('idle');
+
+        try {
+            const dataToInsert = {
+                first_name: formData.first_name,
+                last_name: formData.last_name,
+                email: formData.email,
+                message: formData.phone ? `[Phone: ${formData.phone}]\n\n${formData.message}` : formData.message
+            };
+
+            const { error } = await supabase.from('contact_messages').insert([dataToInsert]);
+
+            if (error) throw error;
+
+            setSubmitStatus('success');
+            setFormData({ first_name: '', last_name: '', email: '', phone: '', message: '' });
+            setTimeout(() => setSubmitStatus('idle'), 5000);
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            setSubmitStatus('error');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
     return (
         <section className={style.faqSection}>
-            <div className={style.container}>
-                <div id="contact-form" className={style.contactForm}>
-                    <h2>Name</h2>
-                    <form onSubmit={handleFormSubmit}>
-                        <div className={style.nameRow}>
-                            <div className={style.inputGroup}>
-                                <label htmlFor="first_name">First Name *</label>
-                                <input type="text" id="first_name" name="first_name" placeholder="First Name" required value={formData.first_name} onChange={handleInputChange} />
-                            </div>
-                            <div className={style.inputGroup}>
-                                <label htmlFor="last_name">Last Name *</label>
-                                <input type="text" id="last_name" name="last_name" placeholder="Last Name" required value={formData.last_name} onChange={handleInputChange} />
-                            </div>
-                        </div>
+            <div className="w-full max-w-7xl mx-auto px-4 lg:px-8">
+                <div className={style.faqGrid}>
+                    <div className={style.faqColumn}>
+                        <h2 className={style.sectionTitle}>Frequently Asked Questions</h2>
+                        <p className={style.sectionSubtitle}>
+                            Find answers to common questions about our custom shipping container solutions
+                        </p>
 
-                        <div className={style.inputGroup}>
-                            <label htmlFor="email">Email *</label>
-                            <input type="email" id="email" name="email" required value={formData.email} onChange={handleInputChange} />
-                        </div>
-
-                        <div className={style.inputGroup}>
-                            <label htmlFor="message">Comment or Message</label>
-                            <textarea id="message" name="message" rows={6} value={formData.message} onChange={handleInputChange}></textarea>
-                        </div>
-
-                        <button type="submit" className={style.submitBtn} disabled={isSubmitting}>
-                            {isSubmitting ? 'Submitting...' : 'Submit'}
-                        </button>
-
-                        {submitStatus === 'success' && (
-                            <p className="mt-4 text-green-500 font-medium">Thank you! Your message has been sent.</p>
+                        {faqData.length === 0 ? (
+                            <p className={style.loadingText}>Loading FAQs...</p>
+                        ) : (
+                            faqData.map((faq, index) => (
+                                <div key={faq.id} className={style.faqItem}>
+                                    <button
+                                        type="button"
+                                        className={style.faqQuestion}
+                                        onClick={() => toggleFAQ(index)}
+                                    >
+                                        <span>{index + 1}. {faq.question}</span>
+                                        <span className={style.toggleIcon}>
+                                            {openFAQ === index ? '−' : '+'}
+                                        </span>
+                                    </button>
+                                    {openFAQ === index && (
+                                        <div className={style.faqAnswer}>
+                                            <p>{faq.answer}</p>
+                                        </div>
+                                    )}
+                                </div>
+                            ))
                         )}
-                        {submitStatus === 'error' && (
-                            <p className="mt-4 text-red-500 font-medium">An error occurred. Please try again.</p>
-                        )}
-                    </form>
-                </div>
-
-                <div className={style.faqContainer}>
-                    <div className={style.faqHeader}>
-                        <span className={style.learnMore}>Learn More From</span>
-                        <h2>Our FAQ</h2>
                     </div>
 
-                    {faqData.length === 0 ? (
-                        <p className="text-gray-500 mt-4">No FAQs available at the moment.</p>
-                    ) : (
-                        faqData.map((faq, index) => (
-                            <div key={faq.id} className={style.faqItem}>
-                                <button
-                                    type="button"
-                                    className={style.faqQuestion}
-                                    onClick={() => toggleFAQ(index)}
-                                >
-                                    <span>{index + 1}. {faq.question}</span>
-                                    <span className={style.toggleIcon}>
-                                        {openFAQ === index ? '−' : '+'}
-                                    </span>
-                                </button>
-                                {openFAQ === index && (
-                                    <div className={style.faqAnswer}>
-                                        <p>{faq.answer}</p>
-                                    </div>
-                                )}
+                    <div className={style.formColumn}>
+                        <h3 className={style.formTitle}>Still have questions?</h3>
+                        <p className={style.formSubtitle}>
+                            Need immediate assistance? Call us directly at <a href="tel:+919915360666" className={style.contactLink}>+91 9915360666</a>
+                        </p>
+                        
+                        <form onSubmit={handleSubmit} className={style.contactForm}>
+                            <div className={style.formRow}>
+                                <input
+                                    type="text"
+                                    name="first_name"
+                                    placeholder="First Name"
+                                    value={formData.first_name}
+                                    onChange={handleInputChange}
+                                    required
+                                    className={style.formInput}
+                                />
+                                <input
+                                    type="text"
+                                    name="last_name"
+                                    placeholder="Last Name"
+                                    value={formData.last_name}
+                                    onChange={handleInputChange}
+                                    required
+                                    className={style.formInput}
+                                />
                             </div>
-                        ))
-                    )}
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Email Address"
+                                value={formData.email}
+                                onChange={handleInputChange}
+                                required
+                                className={style.formInput}
+                            />
+                            <input
+                                type="tel"
+                                name="phone"
+                                placeholder="Phone Number"
+                                value={formData.phone}
+                                onChange={handleInputChange}
+                                className={style.formInput}
+                            />
+                            <textarea
+                                name="message"
+                                placeholder="Your Message"
+                                value={formData.message}
+                                onChange={handleInputChange}
+                                required
+                                rows={4}
+                                className={style.formTextarea}
+                            />
+                            <button
+                                type="submit"
+                                disabled={isSubmitting}
+                                className={style.submitButton}
+                            >
+                                {isSubmitting ? 'Sending...' : 'Send Message'}
+                            </button>
+
+                            {submitStatus === 'success' && (
+                                <p className={style.successMessage}>
+                                    Thank you! Your message has been sent successfully.
+                                </p>
+                            )}
+                            {submitStatus === 'error' && (
+                                <p className={style.errorMessage}>
+                                    Sorry, there was an error sending your message. Please try again.
+                                </p>
+                            )}
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>

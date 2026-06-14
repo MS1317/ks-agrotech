@@ -5,11 +5,7 @@
   font-family: Arial, sans-serif;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
+/* Container styles handled by tailwind */
 
 .footerContent {
   display: grid;
@@ -137,9 +133,7 @@
     gap: 30px;
   }
   
-  .container {
-    padding: 0 15px;
-  }
+  /* Container padding handled by tailwind */
   
   .photoGrid {
     grid-template-columns: repeat(3, 1fr);

@@ -8,7 +8,7 @@ export default function Hero() {
             {/* Separate backdrop filter overlay for performance */}
             <div className="absolute inset-0 backdrop-brightness-50 transform-gpu will-change-[backdrop-filter] z-0" />
             
-            <div className="relative z-[1] container mx-auto heroContent max-w-[1280] w-full h-full flex items-center py-6 px-8 ">
+            <div className="relative z-[1] w-full max-w-7xl mx-auto px-4 lg:px-8 h-full flex items-center py-6">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}

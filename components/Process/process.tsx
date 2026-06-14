@@ -5,13 +5,13 @@ import { motion } from "framer-motion";
 const Process = () => {
     return (
         <motion.section 
-            className="bg-white py-16 px-4"
+            className="bg-white py-16"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.8 }}
         >
-            <div className="max-w-6xl mx-auto">
+            <div className="w-full max-w-7xl mx-auto px-4 lg:px-8">
                 {/* Header */}
                 <motion.div 
                     className="text-center mb-12"
@@ -55,6 +55,7 @@ const Process = () => {
                             </div>
                         </div>
                         <h3 className="text-xl font-semibold text-gray-800 mt-4">Quality Materials</h3>
+                        <p className="text-sm text-gray-600 mt-2 px-4">Sourcing only the finest grade materials for durability and performance.</p>
                     </motion.div>
 
                     {/* Arrow 1 */}
@@ -87,6 +88,7 @@ const Process = () => {
                             </div>
                         </div>
                         <h3 className="text-xl font-semibold text-gray-800 mt-4">Precision Engineering</h3>
+                        <p className="text-sm text-gray-600 mt-2 px-4">State-of-the-art machinery ensuring exact specifications and tolerances.</p>
                     </motion.div>
 
                     {/* Arrow 2 */}
@@ -119,6 +121,7 @@ const Process = () => {
                             </div>
                         </div>
                         <h3 className="text-xl font-semibold text-gray-800 mt-4">Quality Testing</h3>
+                        <p className="text-sm text-gray-600 mt-2 px-4">Rigorous inspection to guarantee flawlessness in every product.</p>
                     </motion.div>
 
                     {/* Arrow 3 */}
@@ -151,6 +154,7 @@ const Process = () => {
                             </div>
                         </div>
                         <h3 className="text-xl font-semibold text-gray-800 mt-4">On-Time Delivery</h3>
+                        <p className="text-sm text-gray-600 mt-2 px-4">Reliable logistics to ensure your order arrives exactly when needed.</p>
                     </motion.div>
                 </motion.div>
             </div>

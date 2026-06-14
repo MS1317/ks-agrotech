@@ -48,7 +48,7 @@ export default function Services() {
             viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.8 }}
         >
-            <div className={`${style["services-container"]} container mx-auto`}>
+            <div className={`${style["services-container"]} w-full max-w-7xl mx-auto px-4 lg:px-8`}>
                 <motion.div 
                     className={`${style.info}`}
                     initial={{ opacity: 0, y: -20 }}
@@ -61,7 +61,7 @@ export default function Services() {
                 </motion.div>
 
                 <motion.div 
-                    className="services flex flex-row flex-wrap justify-center"
+                    className={style.servicesGrid}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.1 }}

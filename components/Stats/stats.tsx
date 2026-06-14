@@ -13,7 +13,7 @@ export default function Stats() {
             transition={{ duration: 0.8 }}
             style={{ translateZ: 0 }}
         >
-            <div className={`${style["stats-container"]} container mx-auto`}>
+            <div className={`${style["stats-container"]} w-full max-w-7xl mx-auto px-4 lg:px-8`}>
                 <motion.div 
                     className={`${style.info} h-100 transform-gpu`}
                     initial={{ opacity: 0, x: -30 }}

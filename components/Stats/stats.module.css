@@ -1,7 +1,8 @@
-.statsSec{
+.statsSec {
     background-color: #f8f9fa;
 }
-.info{
+
+.info {
     background: var(--lightblue);
     flex: 1;
     min-width: 300px;
@@ -12,11 +13,11 @@
     padding: clamp(1rem, 2vw, 2rem);
 }
 
-.info h2{
+.info h2 {
     color: var(--highlighted-text);
 }
 
-.stats-container{
+.stats-container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -24,17 +25,16 @@
     flex-wrap: wrap;
     top: -30px;
     position: relative;
-    box-shadow: 1px 1px 10px rgba(10, 10, 10, 20%);
 }
 
-.statsCount{
+.statsCount {
     min-width: 300px;
     display: flex;
     flex: 1;
     flex-wrap: wrap;
 }
 
-.box{
+.box {
     color: var(--background);
     border: 1px solid var(--lightblue);
     flex: 1;
@@ -47,4 +47,3 @@
     gap: clamp(0.5rem, 1vw, 1rem);
     background: white;
 }
-

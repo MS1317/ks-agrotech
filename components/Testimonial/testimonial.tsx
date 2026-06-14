@@ -78,7 +78,7 @@ const Testimonial: React.FC = () => {
 
     return (
         <section className={styles.testimonialSection}>
-            <div className={styles.testimonialContainer}>
+            <div className={`${styles.testimonialContainer} w-full max-w-7xl mx-auto px-4 lg:px-8`}>
                 <div className={styles.header}>
                     <span className={styles.subtitle}>Client Feedback</span>
                     <div className={styles.underline}></div>

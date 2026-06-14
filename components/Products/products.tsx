@@ -73,7 +73,7 @@ export const Products = () => {
             viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.8 }}
         >
-            <div className={style.container}>
+            <div className="w-full max-w-7xl mx-auto px-4 lg:px-8">
                 <motion.div 
                     className={style.header}
                     initial={{ opacity: 0, y: 20 }}

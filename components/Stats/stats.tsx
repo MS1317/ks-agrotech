@@ -2,57 +2,80 @@ import React from "react";
 import style from "./stats.module.css";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { motion } from "framer-motion";
 export default function Stats() {
     return (
-        <section className={`${style.statsSec} container-fluid`}>
-            <div className={`${style["stats-container"]} container mx-auto`}>
-                <div className={`${style.info} h-100`}>
+        <motion.section 
+            className={`${style.statsSec} container-fluid relative`}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.8 }}
+            style={{ translateZ: 0 }}
+        >
+            <div className={`${style["stats-container"]} w-full max-w-7xl mx-auto px-4 lg:px-8`}>
+                <motion.div 
+                    className={`${style.info} h-100 transform-gpu`}
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.7, ease: "easeOut" }}
+                >
                     <h3 className="font-semibold">Our Proud</h3>
-                    <h2 className="font-bold">25 years of undefeated success</h2>
-                    <p className="font-normal">We have a long and proud history givin emphasis to environment social and economic outcomes to deliver places that respond.</p>
-                </div>
-                <div className={`${style.statsCount} h-100`}>
-                    <div className={style.box}>
+                    <h2 className="font-bold">Excellence in Manufacturing</h2>
+                    <p className="font-normal">K.S. Agrotech has established itself as a formidable manufacturer in Sahnewal, Punjab, delivering precision-engineered pulleys for demanding agricultural applications.</p>
+                </motion.div>
+                <motion.div 
+                    className={`${style.statsCount} h-100 transform-gpu`}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    variants={{
+                        hidden: {},
+                        visible: { transition: { staggerChildren: 0.15 } }
+                    }}
+                >
+                    <motion.div className={`${style.box} transform-gpu`} variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } }}>
                         <div className={style.icon}>
-                            <FontAwesomeIcon icon={faUser}/>
+                            <FontAwesomeIcon icon={faUser} />
                         </div>
                         <div>
-                            <h1 className="text-center font-bold">0</h1>
-                            <p className="font-semibold">Awards</p>
+                            <h1 className="text-center font-bold">1+</h1>
+                            <p className="font-semibold">Years Experience</p>
                         </div>
-                    </div>
+                    </motion.div>
 
-                    <div className={style.box}>
+                    <motion.div className={`${style.box} transform-gpu`} variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } }}>
                         <div className={style.icon}>
-                            <FontAwesomeIcon icon={faUser}/>
+                            <FontAwesomeIcon icon={faUser} />
                         </div>
                         <div>
-                            <h1 className="text-center font-bold">0</h1>
+                            <h1 className="text-center font-bold">15K+</h1>
                             <p className="font-semibold">Parts Produced</p>
                         </div>
-                    </div>
+                    </motion.div>
 
-                    <div className={style.box}>
+                    <motion.div className={`${style.box} transform-gpu`} variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } }}>
                         <div className={style.icon}>
-                            <FontAwesomeIcon icon={faUser}/>
+                            <FontAwesomeIcon icon={faUser} />
                         </div>
                         <div>
-                            <h1 className="text-center font-bold">0</h1>
-                            <p className="font-semibold">Ship Repair</p>
+                            <h1 className="text-center font-bold">500+</h1>
+                            <p className="font-semibold">Happy Clients</p>
                         </div>
-                    </div>
-                    
-                    <div className={style.box}>
+                    </motion.div>
+
+                    <motion.div className={`${style.box} transform-gpu`} variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } }}>
                         <div className={style.icon}>
-                            <FontAwesomeIcon icon={faUser}/>
+                            <FontAwesomeIcon icon={faUser} />
                         </div>
                         <div>
-                            <h1 className="text-center font-bold">0</h1>
-                            <p className="font-semibold">Dedicated Customers</p>
+                            <h1 className="text-center font-bold">50+</h1>
+                            <p className="font-semibold">Product Types</p>
                         </div>
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
             </div>
-        </section>
+        </motion.section>
     );
 }

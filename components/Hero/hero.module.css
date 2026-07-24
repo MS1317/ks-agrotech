@@ -1,10 +1,17 @@
-.heroVideo{
+.heroVideo {
     object-fit: cover;
     height: 100%;
     width: 100%;
 }
 
-.highlights{
+.hero {
+    background-image: url("/images/Home/hero/Untitled-1.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.highlights {
     font-size: 12px;
     font-weight: 400;
     color: #ffffff;

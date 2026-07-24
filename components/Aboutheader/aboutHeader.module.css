@@ -6,10 +6,7 @@
     background-repeat: no-repeat;
 }
 
-.aboutContainer {
-    max-width: 1200px;
-    padding: 0 1rem;
-}
+/* Container styles moved to tailwind classes */
 
 .contentWrapper {
     display: grid;

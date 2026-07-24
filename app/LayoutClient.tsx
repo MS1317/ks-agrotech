@@ -2,17 +2,21 @@
 import { usePathname } from 'next/navigation';  
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/footer';
+import WhatsappButton from '../components/WhatsAppButton/WhatsappButton';
 
 export default function LayoutClient({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isUnderConstruction = pathname === '/under-construction';
-  console.log(pathname);
+  const isAdminRoute = pathname?.startsWith('/admin');
+  
+  const showHeaderFooter = !isUnderConstruction && !isAdminRoute;
 
   return (
     <>
-      {!isUnderConstruction && <Header />}
+      {showHeaderFooter && <Header />}
       {children} {/* 👈 this is the magic sauce */}
-      {!isUnderConstruction && <Footer />}
+      {showHeaderFooter && <Footer />}
+      <WhatsappButton />
     </>
   );
 }

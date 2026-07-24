@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
 
 export const dynamic = "force-dynamic";
 
@@ -11,26 +12,34 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  if (!url || !key) {
+  if (!supabaseUrl || !supabaseAnonKey) {
     return NextResponse.json(
       { error: "Missing Supabase environment variables" },
       { status: 500 }
     );
   }
 
-  const response = await fetch(`${url}/rest/v1/faqs?select=id&limit=1`, {
-    headers: {
-      apikey: key,
-      authorization: `Bearer ${key}`,
-    },
-    cache: "no-store",
-  });
+  try {
+    const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    const { error } = await supabase.from("faqs").select("id").limit(1);
 
-  return NextResponse.json(
-    { ok: response.ok },
-    { status: response.ok ? 200 : 502 }
-  );
+    if (error) {
+      throw error;
+    }
+
+    return NextResponse.json({
+      ok: true,
+      timestamp: new Date().toISOString(),
+    });
+  } catch (error) {
+    console.error("Keep-alive failed:", error);
+
+    return NextResponse.json(
+      { ok: false, error: "Failed to ping Supabase" },
+      { status: 500 }
+    );
+  }
 }

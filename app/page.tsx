@@ -1,29 +1,36 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import Hero from '../components/Hero/hero';
-import Stats from '../components/Stats/stats';
-import Services from '../components/Services/services';
-import CTA from '../components/CTA/cta';
-import Teams from '../components/Team/teams';
-import { FAQ } from '../components/FAQ/faq';
-import { Projects } from '../components/Projects/projects';
-import { CTA2 } from '../components/CTA2/cta2';
-import Process from '../components/Process/process';
-import Testimonial from '../components/Testimonial/testimonial';
+import AboutHeader from '../components/Aboutheader/aboutHeader';
+
+const Stats = dynamic(() => import('../components/Stats/stats'), { ssr: false });
+const Services = dynamic(() => import('../components/Services/services'), { ssr: false });
+const CTA = dynamic(() => import('../components/CTA/cta'), { ssr: false });
+const Teams = dynamic(() => import('../components/Team/teams'), { ssr: false });
+const FAQ = dynamic(() => import('../components/FAQ/faq').then(mod => mod.FAQ), { ssr: false });
+const Products = dynamic(() => import('../components/Products/products').then(mod => mod.Products), { ssr: false });
+const CTA2 = dynamic(() => import('../components/CTA2/cta2').then(mod => mod.CTA2), { ssr: false });
+const Process = dynamic(() => import('../components/Process/process'), { ssr: false });
+const Testimonial = dynamic(() => import('../components/Testimonial/testimonial'), { ssr: false });
 
 export default function Home() {
   return (
-          <>
-          <Hero />
-          <Stats />
-          <Services />
-          <CTA />
-          <Teams />
-          <FAQ />
-          <Projects />
-          <CTA2 />
-          <Process />
-          <Testimonial />
-        </>
+    <>
+      <Hero />
+      <Stats />
+      <AboutHeader sections={[
+        { title: "Our Legacy", text: "K.S. Agrotech has been a pioneer in manufacturing agricultural pulleys with decades of excellence." },
+        { title: "Our Mission", text: "To provide the highest quality V belt and agriculture pulleys to enhance machinery performance." }
+      ]} />
+      <Services />
+      <CTA />
+      <Products />
+      <Teams />
+      <FAQ />
+      <CTA2 />
+      <Process />
+      <Testimonial />
+    </>
   );
 }

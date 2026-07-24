@@ -10,17 +10,17 @@ export default function AboutPage() {
     <>
       <AboutHeader sections={[
         {
-          title: "COMPANY HISTORY",
-        text: "We started in 2010 with a mission to build scalable digital solutions..."
-      },
-      {
-        title: "HOW WE WORK",
-        text: "We believe in transparency, agile processes, and client-first delivery..."
-      },
-      {
-        title: "OUR VISION",
-        text: "To become a global leader in tech innovation and solutions."
-      }
+          title: "OUR STORY",
+          text: "K.S. Agrotech has established itself as a formidable manufacturer in Sahnewal, Punjab, since October 7, 2024. Our expertise lies in crafting a wide array of agricultural pulleys, ensuring exceptional performance and durability."
+        },
+        {
+          title: "OUR PRODUCTS",
+          text: "We specialize in manufacturing V belt pulleys, thresher pulleys, reaper pulleys, combine pulleys, bush type pulleys, cam pulleys, and mudloader pulleys. Each product exemplifies precision engineering."
+        },
+        {
+          title: "OUR COMMITMENT",
+          text: "Our dedication to delivering quality solutions sets us apart in the industry. We ensure exceptional performance and durability in demanding agricultural applications."
+        }
     ]}/>
 
     <Stats />

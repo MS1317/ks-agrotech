@@ -6,19 +6,19 @@ const contactData = [
     {
         icon: <Home size={32} />,
         title: "Address",
-        info: "262 Miladina Mrest Street Behansed,",
+        info: "Sahnewal, Punjab, India",
         type: "address"
     },
     {
         icon: <Mail size={32} />,
         title: "Email",
-        info: "support@yoursiteurl.com",
+        info: "ksagrotech5@gmail.com",
         type: "email"
     },
     {
         icon: <Phone size={32} />,
         title: "Phone",
-        info: "+04 3333 6789",
+        info: "+91 9915360666",
         type: "phone"
     }
 ];

@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import style from "./projects.module.css";
 import Image from "next/image";
 
-export const Projects = () => {
+export const Products = () => {
     const [activeFilter, setActiveFilter] = useState("Show All");
     const [isAnimating, setIsAnimating] = useState(false);
 
     const filterOptions = ["Show All", "Grinding Machines", "Rotary Tables", "Vertical Lathes"];
 
-    const projectsData = [
+    const productsData = [
         {
             id: 1,
             title: "Vertical Lathes",
@@ -53,9 +53,9 @@ export const Projects = () => {
         }
     ];
 
-    const filteredProjects = activeFilter === "Show All" 
-        ? projectsData 
-        : projectsData.filter(project => project.category === activeFilter);
+    const filteredProducts = activeFilter === "Show All" 
+        ? productsData 
+        : productsData.filter(product => product.category === activeFilter);
 
     const handleFilterChange = (filter: string) => {
         if (filter !== activeFilter) {
@@ -71,8 +71,8 @@ export const Projects = () => {
         <section className={style.projectsSection}>
             <div className={style.container}>
                 <div className={style.header}>
-                    <span className={style.ourWorks}>Our Works</span>
-                    <h2>Latest Projects</h2>
+                    <span className={style.ourWorks}>Our Products</span>
+                    <h2>Latest Products</h2>
                 </div>
 
                 <div className={style.filterButtons}>
@@ -88,18 +88,18 @@ export const Projects = () => {
                 </div>
 
                 <div className={`${style.projectsGrid} ${isAnimating ? style.animating : ''}`}>
-                    {filteredProjects.map((project, index) => (
+                    {filteredProducts.map((product, index) => (
                         <div 
-                            key={project.id} 
+                            key={product.id} 
                             className={style.projectCard}
                             style={{
                                 animationDelay: `${index * 0.1}s`
                             }}
                         >
                             <div className={style.imageContainer}>
-                                <Image src={project.image} alt={project.title} width={500} height={300} />
+                                <Image src={product.image} alt={product.title} width={500} height={300} />
                                 <div className={style.overlay}>
-                                    <h3>{project.title}</h3>
+                                    <h3>{product.title}</h3>
                                 </div>
                             </div>
                         </div>
